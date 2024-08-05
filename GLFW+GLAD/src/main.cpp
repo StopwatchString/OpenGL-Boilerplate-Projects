@@ -4,11 +4,11 @@
 #include "GLFW/glfw3.h"
 
 double ssin(double theta) {
-    return sin(theta * 0.5 + 0.5);
+    return sin(theta) * 0.5 + 0.5;
 }
 
 double scos(double theta) {
-    return cos(theta * 0.5 + 0.5);
+    return cos(theta) * 0.5 + 0.5;
 }
 
 void error_callback(int error, const char* description)
