@@ -3,11 +3,11 @@
 #include "glad/gl.h"
 #include "GLFW/glfw3.h"
 
-double ssin(double theta) {
+static inline double ssin(double theta) {
     return sin(theta) * 0.5 + 0.5;
 }
 
-double scos(double theta) {
+static inline double scos(double theta) {
     return cos(theta) * 0.5 + 0.5;
 }
 
@@ -47,7 +47,6 @@ int main()
     glfwMakeContextCurrent(window);
     gladLoadGL(glfwGetProcAddress);
 
-
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, width, height);
@@ -58,7 +57,6 @@ int main()
         double time = glfwGetTime();
         glClearColor(ssin(time), ssin(time), scos(time), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
 
         glfwSwapBuffers(window);
         glfwPollEvents();
