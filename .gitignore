@@ -5,3 +5,7 @@ GLFW+GLAD+DebugWindow/.vs
 GLFW+GLAD+DebugWindow/GLFW+GLA.a5679d36
 GLFW+GLAD+DebugWindow/x64
 GLFW+GLAD+DebugWindow/imgui.ini
+GLFW+GLEW/x64
+GLFW+GLEW/imgui.ini
+GLFW+GLEW/GLFW+GLEW
+GLFW+GLEW/.vs
