@@ -101,7 +101,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\dev\opengl-boilerplate-projects\GLFW+GLEW\include\DebugWindow;C:\dev\opengl-boilerplate-projects\GLFW+GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -138,8 +138,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\DebugWindow\DebugWindow.h" />
+    <ClInclude Include="include\DebugWindow\DebugWindowGLFW.h" />
+    <ClInclude Include="include\DebugWindow\DebugWindowWin32.h" />
     <ClInclude Include="include\DebugWindow\imconfig.h" />
     <ClInclude Include="include\DebugWindow\imgui.h" />
+    <ClInclude Include="include\DebugWindow\imgui_impl_glfw.h" />
     <ClInclude Include="include\DebugWindow\imgui_impl_opengl3.h" />
     <ClInclude Include="include\DebugWindow\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="include\DebugWindow\imgui_impl_win32.h" />
@@ -149,9 +152,6 @@
     <ClInclude Include="include\DebugWindow\imstb_rectpack.h" />
     <ClInclude Include="include\DebugWindow\imstb_textedit.h" />
     <ClInclude Include="include\DebugWindow\imstb_truetype.h" />
-    <ClInclude Include="include\DebugWindow\logo.h" />
-    <ClInclude Include="include\DebugWindow\stb_image.h" />
-    <ClInclude Include="include\DebugWindow\winapiHelpers.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\GLFW\glfw3native.h" />
     <ClInclude Include="include\glm\common.hpp" />
@@ -592,15 +592,18 @@
     <ClCompile Include="include\glm\detail\glm.cpp" />
     <ClCompile Include="include\glm\glm.cppm" />
     <ClCompile Include="src\DebugWindow\DebugWindow.cpp" />
+    <ClCompile Include="src\DebugWindow\DebugWindowGLFW.cpp" />
+    <ClCompile Include="src\DebugWindow\DebugWindowWin32.cpp" />
     <ClCompile Include="src\DebugWindow\imgui.cpp" />
+    <ClCompile Include="src\DebugWindow\imgui_demo.cpp" />
     <ClCompile Include="src\DebugWindow\imgui_draw.cpp" />
+    <ClCompile Include="src\DebugWindow\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\DebugWindow\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\DebugWindow\imgui_impl_win32.cpp" />
     <ClCompile Include="src\DebugWindow\imgui_tables.cpp" />
     <ClCompile Include="src\DebugWindow\imgui_widgets.cpp" />
     <ClCompile Include="src\DebugWindow\implot.cpp" />
     <ClCompile Include="src\DebugWindow\implot_items.cpp" />
-    <ClCompile Include="src\DebugWindow\winapiHelpers.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

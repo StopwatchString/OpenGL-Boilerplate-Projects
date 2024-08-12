@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\DebugWindow">
-      <UniqueIdentifier>{accc73f1-9864-49f2-a7ee-4b2a9487f465}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GL">
       <UniqueIdentifier>{30d78262-8880-4444-9e60-909206a368e3}</UniqueIdentifier>
     </Filter>
@@ -25,56 +22,14 @@
     <Filter Include="Header Files\glm">
       <UniqueIdentifier>{318a04e7-6fdf-45a4-b731-e96ada59bcda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DebugWindow">
+      <UniqueIdentifier>{77804411-e0b7-433a-95cc-ad8b98a10055}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\DebugWindow">
-      <UniqueIdentifier>{012589b7-d07f-455b-ba4f-55af01fbdd4a}</UniqueIdentifier>
+      <UniqueIdentifier>{d728afe9-ba50-4b56-a9ad-7355c95787f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\DebugWindow\DebugWindow.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imconfig.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imgui.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imgui_impl_opengl3.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imgui_impl_opengl3_loader.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imgui_impl_win32.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imgui_internal.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\implot.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\implot_internal.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imstb_rectpack.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imstb_textedit.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\imstb_truetype.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\logo.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\stb_image.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DebugWindow\winapiHelpers.h">
-      <Filter>Header Files\DebugWindow</Filter>
-    </ClInclude>
     <ClInclude Include="include\GL\eglew.h">
       <Filter>Header Files\GL</Filter>
     </ClInclude>
@@ -960,6 +915,51 @@
     <ClInclude Include="include\shaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\DebugWindow\DebugWindow.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\DebugWindowGLFW.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\DebugWindowWin32.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imconfig.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imgui.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imgui_impl_glfw.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imgui_impl_opengl3.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imgui_impl_opengl3_loader.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imgui_impl_win32.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imgui_internal.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\implot.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\implot_internal.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imstb_rectpack.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imstb_textedit.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugWindow\imstb_truetype.h">
+      <Filter>Header Files\DebugWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\glm\detail\func_common.inl">
@@ -1384,13 +1384,25 @@
     <ClCompile Include="include\glm\glm.cppm">
       <Filter>Header Files\glm</Filter>
     </ClCompile>
-    <ClCompile Include="src\DebugWindow\DebugWindow.cpp">
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugWindow\DebugWindowGLFW.cpp">
+      <Filter>Source Files\DebugWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugWindow\DebugWindowWin32.cpp">
       <Filter>Source Files\DebugWindow</Filter>
     </ClCompile>
     <ClCompile Include="src\DebugWindow\imgui.cpp">
       <Filter>Source Files\DebugWindow</Filter>
     </ClCompile>
+    <ClCompile Include="src\DebugWindow\imgui_demo.cpp">
+      <Filter>Source Files\DebugWindow</Filter>
+    </ClCompile>
     <ClCompile Include="src\DebugWindow\imgui_draw.cpp">
+      <Filter>Source Files\DebugWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugWindow\imgui_impl_glfw.cpp">
       <Filter>Source Files\DebugWindow</Filter>
     </ClCompile>
     <ClCompile Include="src\DebugWindow\imgui_impl_opengl3.cpp">
@@ -1411,11 +1423,8 @@
     <ClCompile Include="src\DebugWindow\implot_items.cpp">
       <Filter>Source Files\DebugWindow</Filter>
     </ClCompile>
-    <ClCompile Include="src\DebugWindow\winapiHelpers.cpp">
+    <ClCompile Include="src\DebugWindow\DebugWindow.cpp">
       <Filter>Source Files\DebugWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

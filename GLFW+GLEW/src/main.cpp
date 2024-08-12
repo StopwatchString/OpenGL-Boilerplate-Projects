@@ -9,7 +9,7 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
-#include "DebugWindow.h"
+#include "DebugWindowGLFW.h"
 
 void error_callback(int error, const char* description)
 {
@@ -105,7 +105,8 @@ int main()
     glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, col));
 
-    DebugWindow debugWindow;
+    DebugWindowGLFW debugWindow;
+
     float r = 1.0f;
     debugWindow.addSliderFloat("r", r, 0.0f, 1.0f);
     float g = 1.0f;
@@ -148,7 +149,9 @@ int main()
         glBindVertexArray(vertex_array);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        debugWindow.draw();
+        if (debugWindow.isWindowOpen()) {
+            debugWindow.draw();
+        }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
