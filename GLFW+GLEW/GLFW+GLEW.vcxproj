@@ -120,7 +120,7 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\dev\opengl-boilerplate-projects\GLFW+GLEW\include\DebugWindow;C:\dev\opengl-boilerplate-projects\GLFW+GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
