@@ -28,8 +28,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 typedef struct Vertex
 {
-    glm::vec2 pos;
-    glm::vec3 col;
+    glm::vec2 position;
+    glm::vec3 color;
+    glm::vec2 texcoord;
 } Vertex;
 
 Vertex vertices[3] =
@@ -92,10 +93,10 @@ int main()
 
     glEnableVertexAttribArray(vpos_location);
     glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
-        sizeof(Vertex), (void*)offsetof(Vertex, pos));
+        sizeof(Vertex), (void*)offsetof(Vertex, position));
     glEnableVertexAttribArray(vcol_location);
     glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
-        sizeof(Vertex), (void*)offsetof(Vertex, col));
+        sizeof(Vertex), (void*)offsetof(Vertex, color));
 
     DebugWindowGLFW debugWindow;
 
@@ -109,16 +110,16 @@ int main()
     debugWindow.addSliderFloat("a", a, 0.0f, 1.0f);
     debugWindow.addSpacing();
 
-    debugWindow.addSliderFloat("x", vertices[0].pos.x, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("y", vertices[0].pos.y, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("x", vertices[0].position.x, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("y", vertices[0].position.y, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
-    debugWindow.addSliderFloat("x", vertices[1].pos.x, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("y", vertices[1].pos.y, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("x", vertices[1].position.x, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("y", vertices[1].position.y, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
-    debugWindow.addSliderFloat("x", vertices[2].pos.x, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("y", vertices[2].pos.y, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("x", vertices[2].position.x, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("y", vertices[2].position.y, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
     while (!glfwWindowShouldClose(window)) {
