@@ -9,6 +9,10 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
+#include "GLClasses/VAO.h"
+#include "GLClasses/VBO.h"
+#include "GLClasses/ShaderProgram.h"
+
 #include "DebugWindowGLFW.h"
 
 void error_callback(int error, const char* description)
@@ -73,31 +77,19 @@ int main()
     glfwSwapInterval(1);
 
     // Initialize OpenGL Resources
-    GLuint vertex_buffer;
-    glGenBuffers(1, &vertex_buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+    VBO vertex_buffer;
+    vertex_buffer.bind();
+    vertex_buffer.allocate(sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
-    const GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
-    glCompileShader(vertex_shader);
+    ShaderProgram program(vertex_shader_text, fragment_shader_text);
 
-    const GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
-    glCompileShader(fragment_shader);
+    const GLint mvp_location = program.getUniformLocation("MVP");
+    const GLint vpos_location = program.getAttribLocation("vPos");
+    const GLint vcol_location = program.getAttribLocation("vCol");
 
-    const GLuint program = glCreateProgram();
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
+    VAO vertex_array;
+    vertex_array.bind();
 
-    const GLint mvp_location = glGetUniformLocation(program, "MVP");
-    const GLint vpos_location = glGetAttribLocation(program, "vPos");
-    const GLint vcol_location = glGetAttribLocation(program, "vCol");
-
-    GLuint vertex_array;
-    glGenVertexArrays(1, &vertex_array);
-    glBindVertexArray(vertex_array);
     glEnableVertexAttribArray(vpos_location);
     glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, pos));
@@ -134,7 +126,7 @@ int main()
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(program);
+        program.bind();
 
         glm::mat4 mvp(
             1.0f, 0.0f, 0.0f, 0.0f,
@@ -144,9 +136,10 @@ int main()
             );
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)&mvp);
 
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-        
-        glBindVertexArray(vertex_array);
+        vertex_buffer.bind();
+        vertex_buffer.update(0, sizeof(vertices), vertices);
+
+        vertex_array.bind();
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         if (debugWindow.isWindowOpen()) {
