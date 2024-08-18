@@ -975,6 +975,9 @@
     <ClInclude Include="include\GLClasses\ShaderProgram.h">
       <Filter>Header Files\GLClasses</Filter>
     </ClInclude>
+    <ClInclude Include="include\GLClasses\UBO.h">
+      <Filter>Header Files\GLClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\glm\detail\func_common.inl">

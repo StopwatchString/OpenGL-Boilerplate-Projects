@@ -153,6 +153,7 @@
     <ClInclude Include="include\DebugWindow\imstb_textedit.h" />
     <ClInclude Include="include\DebugWindow\imstb_truetype.h" />
     <ClInclude Include="include\GLClasses\ShaderProgram.h" />
+    <ClInclude Include="include\GLClasses\UBO.h" />
     <ClInclude Include="include\GLClasses\VAO.h" />
     <ClInclude Include="include\GLClasses\VBO.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />

@@ -12,6 +12,7 @@
 #include "GLClasses/VAO.h"
 #include "GLClasses/VBO.h"
 #include "GLClasses/ShaderProgram.h"
+#include "GLClasses/UBO.h"
 
 #include "DebugWindowGLFW.h"
 
@@ -122,20 +123,23 @@ int main()
     debugWindow.addSliderFloat("y", vertices[2].position.y, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
+    program.bind();
+    glm::mat4 mvp(
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
+    );
+    glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)&mvp);
+
+    UBO<std::array<Vertex, 10>> test(10);
+
     while (!glfwWindowShouldClose(window)) {
 
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        program.bind();
 
-        glm::mat4 mvp(
-            1.0f, 0.0f, 0.0f, 0.0f,
-            0.0f, 1.0f, 0.0f, 0.0f,
-            0.0f, 0.0f, 1.0f, 0.0f,
-            0.0f, 0.0f, 0.0f, 1.0f
-            );
-        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)&mvp);
 
         vertex_buffer.bind();
         vertex_buffer.update(0, sizeof(vertices), vertices);
