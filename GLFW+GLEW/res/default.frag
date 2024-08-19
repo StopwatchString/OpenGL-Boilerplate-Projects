@@ -9,5 +9,5 @@ out vec4 fragment;
 
 void main()
 {
-    fragment = vec4(frag_color.r, sin(frag_time) * 0.5 + 0.5, frag_color.g, frag_color.a);
+    fragment = vec4(frag_color.r, frag_color.b, frag_color.g, frag_color.a);
 }

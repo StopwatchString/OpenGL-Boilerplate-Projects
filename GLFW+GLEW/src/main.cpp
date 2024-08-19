@@ -62,16 +62,16 @@ struct Vertex
     glm::vec2 texcoord;
 };
 
-Vertex vertices[8] =
+std::vector<Vertex> vertices =
 {
     { { -0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Bottom, Back
-    { {  0.5f, -0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Back
-    { {  0.5f, -0.5f,  0.5f }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Front
-    { { -0.5f, -0.5f,  0.5f }, { 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Bottom, Front
-    { { -0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Back
-    { {  0.5f,  0.5f, -0.5f }, { 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Back
-    { {  0.5f,  0.5f,  0.5f }, { 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Front
-    { { -0.5f,  0.5f,  0.5f }, { 0.7f, 0.3f, 0.1f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Front
+    { {  0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Back
+    { {  0.5f, -0.5f,  0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Front
+    { { -0.5f, -0.5f,  0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Bottom, Front
+    { { -0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Back
+    { {  0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Back
+    { {  0.5f,  0.5f,  0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Front
+    { { -0.5f,  0.5f,  0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Front
 };
 
 // Index data for triangle strip
@@ -134,7 +134,7 @@ int main()
     vertex_array.bind();
     
     VBO vertex_buffer;
-    vertex_buffer.allocate(sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+    vertex_buffer.allocate(sizeof(Vertex) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW);
 
     IBO index_buffer;
     index_buffer.allocate(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
@@ -150,6 +150,12 @@ int main()
     float g = 1.0f;
     float b = 1.0f;
     float a = 1.0f;
+    float xRot = 0.0f;
+    float yRot = 0.0f;
+    float zRot = 0.0f;
+    float xRotSpeed = 0.0f;
+    float yRotSpeed = 0.0f;
+    float zRotSpeed = 0.0f;
     bool reloadShaders = false;
 
 #ifdef DEBUG_WINDOW
@@ -157,8 +163,19 @@ int main()
     debugWindow.addSliderFloat("r", r, 0.0f, 1.0f);
     debugWindow.addSliderFloat("g", g, 0.0f, 1.0f);
     debugWindow.addSliderFloat("b", b, 0.0f, 1.0f);
-    debugWindow.addSliderFloat("a", a, 0.0f, 1.0f);
     debugWindow.addSpacing();
+
+    debugWindow.addSliderFloat("xRot Speed", xRotSpeed, 0.0f, 3.0f);
+    debugWindow.addSliderFloat("yRot Speed", yRotSpeed, 0.0f, 3.0f);
+    debugWindow.addSliderFloat("zRot Speed", zRotSpeed, 0.0f, 3.0f);
+    debugWindow.addSpacing();
+
+    for (Vertex& vertex : vertices) {
+        debugWindow.addSliderFloat("r", vertex.color.r, 0.0f, 1.0f);
+        debugWindow.addSliderFloat("g", vertex.color.g, 0.0f, 1.0f);
+        debugWindow.addSliderFloat("b", vertex.color.b, 0.0f, 1.0f);
+        debugWindow.addSpacing();
+    }
 
     debugWindow.addButton("Reload Shaders", [&]() {
         reloadShaders = true;
@@ -184,8 +201,11 @@ int main()
 
         program.bind();
 
+        xRot += xRotSpeed;
+        yRot += yRotSpeed;
+        zRot += zRotSpeed;
         glm::mat4& mvp = ubo.data()->mvp;
-        mvp = getRotMat(glfwGetTime() * 8.4, glfwGetTime() * 4.3, glfwGetTime() * 2.3);
+        mvp = getRotMat(xRot, yRot, zRot);
         ubo.data()->time = glfwGetTime();
         ubo.uploadData();
 
@@ -193,7 +213,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         vertex_buffer.bind();
-        vertex_buffer.update(0, sizeof(vertices), vertices);
+        vertex_buffer.update(0, sizeof(Vertex) * vertices.size(), vertices.data());
 
         vertex_array.bind();
         glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, 0);
