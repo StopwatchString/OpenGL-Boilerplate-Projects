@@ -10,14 +10,13 @@ template<typename _DataType>
 class UBO
 {
 public:
-    UBO(GLint location)
+    UBO(GLuint bindingPoint)
+        : m_BindingPoint(bindingPoint)
     {
-        m_Location = location;
-
         glGenBuffers(1, &m_Handle);
         glBindBuffer(GL_UNIFORM_BUFFER, m_Handle);
         glBufferData(GL_UNIFORM_BUFFER, sizeof(_DataType), NULL, GL_DYNAMIC_DRAW);
-        glBindBufferBase(GL_UNIFORM_BUFFER, m_Location, m_Handle);
+        glBindBufferBase(GL_UNIFORM_BUFFER, m_BindingPoint, m_Handle);
 
         glBindBuffer(GL_UNIFORM_BUFFER, 0);
     }
@@ -33,20 +32,27 @@ public:
     
     // Moving OK
     UBO(UBO<_DataType>&& other) noexcept
+        : m_Data(std::move(other.m_Data()))
+        , m_BindingPoint(other.m_BindingPoint)
     {
-        m_Data = std::move(other.m_Data);
-        m_Location = other.m_Location;
+        glDeleteBuffers(1, &m_Handle);
+        m_Handle = other.m_Handle;
 
-        other.m_Location = 0;
+        other.m_BindingPoint = 0;
+        other.m_Handle = 0;
     };
 
     UBO& operator=(UBO<_DataType>&& other) noexcept
     {
         if (this != &other) {
-            m_Data = std::move(other.m_Data);
-            m_Location = other.m_Location;
+            glDeleteBuffers(1, &m_Handle);
 
-            other.m_Location = 0;
+            m_Data = std::move(other.m_Data);
+            m_BindingPoint = other.m_BindingPoint;
+            m_Handle = other.m_Handle;
+
+            other.m_BindingPoint = 0;
+            other.m_Handle = 0;
         }
         return *this;
     };
@@ -67,7 +73,7 @@ public:
 
 private:
     _DataType m_Data;
-    GLint m_Location = 0;
+    GLint m_BindingPoint = 0;
     GLuint m_Handle = 0;
 };
 

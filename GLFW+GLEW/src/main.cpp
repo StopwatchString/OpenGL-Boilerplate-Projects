@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "shaders.h"
+#include "utils.h"
 
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
@@ -83,9 +83,8 @@ int main()
     vertex_buffer.bind();
     vertex_buffer.allocate(sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
-    ShaderProgram program(vertex_shader_text, fragment_shader_text);
+    ShaderProgram program(loadFile("C:\\dev\\OpenGL-Boilerplate-Projects\\GLFW+GLEW\\res\\default.vert"), loadFile("C:\\dev\\OpenGL-Boilerplate-Projects\\GLFW+GLEW\\res\\default.frag"));
 
-    const GLint mvp_location = program.getUniformLocation("MVP");
     const GLint vpos_location = program.getAttribLocation("vPos");
     const GLint vcol_location = program.getAttribLocation("vCol");
 
@@ -124,15 +123,17 @@ int main()
     debugWindow.addSpacing();
 
     program.bind();
-    glm::mat4 mvp(
+
+    UBO<glm::mat4> mvpUBO(0);
+    glm::mat4& mvp = *mvpUBO.data();
+    mvp = {
         1.0f, 0.0f, 0.0f, 0.0f,
         0.0f, 1.0f, 0.0f, 0.0f,
         0.0f, 0.0f, 1.0f, 0.0f,
         0.0f, 0.0f, 0.0f, 1.0f
-    );
-    glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*)&mvp);
+    };
+    mvpUBO.uploadData();
 
-    UBO<std::array<Vertex, 10>> test(10);
 
     while (!glfwWindowShouldClose(window)) {
 

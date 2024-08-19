@@ -8,13 +8,10 @@ class VAO
 {
 public:
     VAO();
-
     ~VAO();
-
     // No copying
     VAO(const VAO& other) = delete;
     VAO& operator=(const VAO& other) = delete;
-
     // Moving OK
     VAO(VAO&& other) noexcept;
     VAO& operator=(VAO&& other) noexcept;

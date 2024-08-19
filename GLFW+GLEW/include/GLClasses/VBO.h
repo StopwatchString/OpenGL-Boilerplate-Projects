@@ -8,22 +8,16 @@ class VBO
 {
 public:
     VBO();
-
     ~VBO();
-
     // No copying
     VBO(const VBO& other) = delete;
     VBO& operator=(const VBO& other) = delete;
-
     // Moving OK
     VBO(VBO&& other) noexcept;
     VBO& operator=(VBO&& other) noexcept;
 
     void bind();
-
-    //(GLenum target, GLsizeiptrARB size, const void *data, GLenum usage);
     void allocate(GLsizeiptr size, const void* data, GLenum usage);
-    //(GLenum target, GLintptr offset, GLsizeiptr size, const void* data);
     void update(GLintptr offset, GLsizeiptr size, const void* data);
 
     GLuint handle() { return m_Handle; }
