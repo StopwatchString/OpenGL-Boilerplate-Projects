@@ -47,11 +47,7 @@ void VBO::bind()
 
 void VBO::allocate(GLsizeiptr size, const void* data, GLenum usage)
 {
-#ifndef NDEBUG
-    GLint currentlyBoundBuffer;
-    glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &currentlyBoundBuffer);
-    assert(currentlyBoundBuffer == m_Handle);
-#endif
+    glBindBuffer(GL_ARRAY_BUFFER, m_Handle);
 
     m_Size = size;
     m_Usage = usage;
@@ -64,12 +60,10 @@ void VBO::allocate(GLsizeiptr size, const void* data, GLenum usage)
 void VBO::update(GLintptr offset, GLsizeiptr size, const void* data)
 {
 #ifndef NDEBUG
-    GLint currentlyBoundBuffer;
-    glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &currentlyBoundBuffer);
-    assert(currentlyBoundBuffer == m_Handle);
     assert(m_Allocated);
     assert((offset + size) <= m_Size);
 #endif
+    glBindBuffer(GL_ARRAY_BUFFER, m_Handle);
 
     glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
 }
