@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <fstream>
 #include <vector>
 #include <string>
@@ -23,3 +26,5 @@ const char* loadFile(const std::string& filename) {
 
     return result;
 }
+
+#endif

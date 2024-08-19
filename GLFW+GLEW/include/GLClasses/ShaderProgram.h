@@ -9,7 +9,7 @@
 class ShaderProgram
 {
 public:
-    ShaderProgram(const char* vert_source, const char* frag_source);
+    ShaderProgram(const std::string& vertSourceFile, const std::string& fragSourceFile);
 
     ~ShaderProgram();
 
@@ -22,12 +22,17 @@ public:
     ShaderProgram& operator=(ShaderProgram&& other) noexcept;
 
     void bind();
+    void reloadShaders();
 
     GLint getUniformLocation(const char* name);
     GLint getAttribLocation(const char* name);
 
 private:
+    void createProgram();
+
     GLuint m_Handle = 0;
+    const std::string m_VertexSourceFile;
+    const std::string m_FragmentSourceFile;
 };
 
 #endif

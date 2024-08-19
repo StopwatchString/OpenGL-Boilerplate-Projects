@@ -1,7 +1,5 @@
 #include <iostream>
 
-#include "utils.h"
-
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
 
@@ -87,7 +85,7 @@ int main()
     vertex_buffer.bind();
     vertex_buffer.allocate(sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
-    ShaderProgram program(loadFile(vertshader), loadFile(fragshader));
+    ShaderProgram program(vertshader, fragshader);
     if (glGetError() != GL_NO_ERROR) {
         std::cout << "program" << std::endl;
     }
@@ -99,20 +97,13 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, position));
     glEnableVertexAttribArray(1);
-    if (glGetError() != GL_NO_ERROR) {
-        std::cout << "attrib1" << std::endl;
-    }
+
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, color));
-    if (glGetError() != GL_NO_ERROR) {
-        std::cout << "attrib2" << std::endl;
-    }
+
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, texcoord));
-    if (glGetError() != GL_NO_ERROR) {
-        std::cout << "attrib3" << std::endl;
-    }
 
     DebugWindowGLFW debugWindow;
 
@@ -128,29 +119,43 @@ int main()
 
     debugWindow.addSliderFloat("x", vertices[0].position.x, -1.0f, 1.0f);
     debugWindow.addSliderFloat("y", vertices[0].position.y, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("z", vertices[0].position.z, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
     debugWindow.addSliderFloat("x", vertices[1].position.x, -1.0f, 1.0f);
     debugWindow.addSliderFloat("y", vertices[1].position.y, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("z", vertices[1].position.z, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
     debugWindow.addSliderFloat("x", vertices[2].position.x, -1.0f, 1.0f);
     debugWindow.addSliderFloat("y", vertices[2].position.y, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("z", vertices[2].position.z, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
-    program.bind();
+    bool reloadShaders = false;
+    debugWindow.addButton("Reload Shaders", [&]() {
+        reloadShaders = true;
+    });
 
-    UBO<glm::mat4> mvpUBO(0);
-    glm::mat4& mvp = *mvpUBO.data();
-    mvp = {
-        1.0f, 0.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f, 0.0f,
-        0.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 0.0f, 1.0f
-    };
-    mvpUBO.uploadData();
+
 
     while (!glfwWindowShouldClose(window)) {
+        if (reloadShaders) {
+            program.reloadShaders();
+            reloadShaders = false;
+        }
+
+        program.bind();
+
+        UBO<glm::mat4> mvpUBO(0);
+        glm::mat4& mvp = *mvpUBO.data();
+        mvp = {
+            1.0f, 0.0f, 0.0f, 0.0f,
+            0.0f, 1.0f, 0.0f, 0.0f,
+            0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 1.0f
+        };
+        mvpUBO.uploadData();
 
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
