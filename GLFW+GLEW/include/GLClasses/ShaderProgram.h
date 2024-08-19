@@ -23,6 +23,7 @@ public:
 
     void bind();
     void reloadShaders();
+    GLuint handle() { return m_Handle; }
 
     GLint getUniformLocation(const char* name);
     GLint getAttribLocation(const char* name);

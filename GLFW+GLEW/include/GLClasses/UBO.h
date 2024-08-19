@@ -63,6 +63,7 @@ public:
     };
 
     _DataType* data() { return &m_Data; }
+    GLuint handle() { return m_Handle; }
     
     void uploadData()
     {

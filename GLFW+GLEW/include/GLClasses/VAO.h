@@ -19,6 +19,8 @@ public:
     void bind();
     void specifyAttribute(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer);
 
+    GLuint handle() { return m_Handle; }
+
 private:
     GLuint m_Handle = 0;;
 };
