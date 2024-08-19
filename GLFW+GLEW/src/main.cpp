@@ -18,6 +18,9 @@
 const std::string vertshader = "res/default.vert";
 const std::string fragshader = "res/default.frag";
 
+int windowWidth = 1000;
+int windowHeight = 1000;
+
 static void glfw_error_callback(int error, const char* description)
 {
     std::cerr << "Error: " << description << '\n';
@@ -32,7 +35,9 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 
 static void glfw_window_size_callback(GLFWwindow* window, int width, int height)
 {
-    glViewport(0, 0, width, height); // TODO:: DebugWindow needs a patch to not interrupt outside GLFW callbacks
+    //glViewport(0, 0, width, height); // TODO:: DebugWindow needs a patch to not interrupt outside GLFW callbacks
+    windowWidth = width;
+    windowHeight = height;
 }
 
 struct Vertex
@@ -69,14 +74,14 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE); // COMPAT PROFILE CHOSEN
 
     // Create a GLFW window
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "OpenGL Window", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return EXIT_FAILURE;
     }
     glfwSetKeyCallback(window, glfw_key_callback);
-    glfwSetWindowAspectRatio(window, 16, 9);
+    glfwSetWindowAspectRatio(window, 1, 1);
     glfwSetWindowSizeCallback(window, glfw_window_size_callback);
 
     glfwMakeContextCurrent(window);
@@ -89,9 +94,8 @@ int main()
         return EXIT_FAILURE;
     }
 
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
+    glfwGetFramebufferSize(window, &windowWidth, &windowHeight);
+    glViewport(0, 0, windowWidth, windowHeight);
     glfwSwapInterval(1);
 
     // Initialize OpenGL Resources
@@ -170,6 +174,8 @@ int main()
             debugWindow.draw();
         }
 #endif
+
+        glViewport(0, 0, windowWidth, windowHeight);
 
         program.bind();
 
