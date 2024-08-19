@@ -36,11 +36,12 @@ typedef struct Vertex
     glm::vec2 texcoord;
 } Vertex;
 
-Vertex vertices[3] =
+Vertex vertices[4] =
 {
-    { { -0.6f, -0.4f, 0.0f }, { 1.f, 0.f, 0.f, 1.0f }, {0.0f, 0.0f} },
-    { {  0.6f, -0.4f, 0.0f }, { 0.f, 1.f, 0.f, 1.0f }, {0.0f, 0.0f} },
-    { {   0.f,  0.6f, 0.0f }, { 0.f, 0.f, 1.f, 1.0f }, {0.0f, 0.0f} }
+    { { -0.5f,  0.5f, 0.0f }, { 1.f, 0.f, 0.f, 1.0f }, { 0.0f, 0.0f } },
+    { { -0.5f, -0.5f, 0.0f }, { 0.f, 1.f, 0.f, 1.0f }, { 0.0f, 0.0f } },
+    { {  0.5f,  0.5f, 0.0f }, { 0.f, 0.f, 1.f, 1.0f }, { 0.0f, 0.0f } },
+    { {  0.5f, -0.5f, 0.0f}, { 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f }},
 };
 
 int main()
@@ -91,18 +92,11 @@ int main()
     }
 
     VAO vertex_array;
-    vertex_array.bind();
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+    vertex_array.specifyAttribute(0, 3, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, position));
-    glEnableVertexAttribArray(1);
-
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
+    vertex_array.specifyAttribute(1, 4, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, color));
-
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+    vertex_array.specifyAttribute(2, 2, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, texcoord));
 
     DebugWindowGLFW debugWindow;
@@ -132,12 +126,15 @@ int main()
     debugWindow.addSliderFloat("z", vertices[2].position.z, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
+    debugWindow.addSliderFloat("x", vertices[3].position.x, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("y", vertices[3].position.y, -1.0f, 1.0f);
+    debugWindow.addSliderFloat("z", vertices[3].position.z, -1.0f, 1.0f);
+    debugWindow.addSpacing();
+
     bool reloadShaders = false;
     debugWindow.addButton("Reload Shaders", [&]() {
         reloadShaders = true;
     });
-
-
 
     while (!glfwWindowShouldClose(window)) {
         if (reloadShaders) {
@@ -164,7 +161,7 @@ int main()
         vertex_buffer.update(0, sizeof(vertices), vertices);
 
         vertex_array.bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
         if (debugWindow.isWindowOpen()) {
             debugWindow.draw();

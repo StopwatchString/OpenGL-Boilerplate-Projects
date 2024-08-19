@@ -17,6 +17,7 @@ public:
     VAO& operator=(VAO&& other) noexcept;
 
     void bind();
+    void specifyAttribute(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer);
 
 private:
     GLuint m_Handle = 0;;

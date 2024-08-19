@@ -29,3 +29,11 @@ void VAO::bind()
 {
     glBindVertexArray(m_Handle);
 }
+
+void VAO::specifyAttribute(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer)
+{
+    glBindVertexArray(m_Handle);
+    glEnableVertexAttribArray(index);
+    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+    glBindVertexArray(0);
+}
