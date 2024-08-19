@@ -76,7 +76,7 @@ Vertex vertices[8] =
 
 // Index data for triangle strip
 std::vector<GLuint> indices = {
-    3,2,6,7,4,2,0,3,1,6,5,4,1,0
+    0,1,3,2,6,1,5,0,4,3,7,6,4,5
 };
 
 struct uniformData {
