@@ -1,8 +1,12 @@
 #version 460
-in vec3 color;
+
+// In params
+in vec4 color;
+
+// Out params
 out vec4 fragment;
 
 void main()
 {
-    fragment = vec4(color, 1.0);
+    fragment = vec4(color);
 }

@@ -16,6 +16,9 @@
 
 #include "DebugWindowGLFW.h"
 
+const std::string vertshader = "res/default.vert";
+const std::string fragshader = "res/default.frag";
+
 void error_callback(int error, const char* description)
 {
     std::cerr << "Error: " << description << '\n';
@@ -30,16 +33,16 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 typedef struct Vertex
 {
-    glm::vec2 position;
-    glm::vec3 color;
+    glm::vec3 position;
+    glm::vec4 color;
     glm::vec2 texcoord;
 } Vertex;
 
 Vertex vertices[3] =
 {
-    { { -0.6f, -0.4f }, { 1.f, 0.f, 0.f } },
-    { {  0.6f, -0.4f }, { 0.f, 1.f, 0.f } },
-    { {   0.f,  0.6f }, { 0.f, 0.f, 1.f } }
+    { { -0.6f, -0.4f, 0.0f }, { 1.f, 0.f, 0.f, 1.0f }, {0.0f, 0.0f} },
+    { {  0.6f, -0.4f, 0.0f }, { 0.f, 1.f, 0.f, 1.0f }, {0.0f, 0.0f} },
+    { {   0.f,  0.6f, 0.0f }, { 0.f, 0.f, 1.f, 1.0f }, {0.0f, 0.0f} }
 };
 
 int main()
@@ -84,20 +87,32 @@ int main()
     vertex_buffer.bind();
     vertex_buffer.allocate(sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
-    ShaderProgram program(loadFile("C:\\dev\\OpenGL-Boilerplate-Projects\\GLFW+GLEW\\res\\default.vert"), loadFile("C:\\dev\\OpenGL-Boilerplate-Projects\\GLFW+GLEW\\res\\default.frag"));
-
-    const GLint vpos_location = program.getAttribLocation("vPos");
-    const GLint vcol_location = program.getAttribLocation("vCol");
+    ShaderProgram program(loadFile(vertshader), loadFile(fragshader));
+    if (glGetError() != GL_NO_ERROR) {
+        std::cout << "program" << std::endl;
+    }
 
     VAO vertex_array;
     vertex_array.bind();
 
-    glEnableVertexAttribArray(vpos_location);
-    glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, position));
-    glEnableVertexAttribArray(vcol_location);
-    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
+    glEnableVertexAttribArray(1);
+    if (glGetError() != GL_NO_ERROR) {
+        std::cout << "attrib1" << std::endl;
+    }
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, color));
+    if (glGetError() != GL_NO_ERROR) {
+        std::cout << "attrib2" << std::endl;
+    }
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+        sizeof(Vertex), (void*)offsetof(Vertex, texcoord));
+    if (glGetError() != GL_NO_ERROR) {
+        std::cout << "attrib3" << std::endl;
+    }
 
     DebugWindowGLFW debugWindow;
 
@@ -134,7 +149,6 @@ int main()
         0.0f, 0.0f, 0.0f, 1.0f
     };
     mvpUBO.uploadData();
-
 
     while (!glfwWindowShouldClose(window)) {
 

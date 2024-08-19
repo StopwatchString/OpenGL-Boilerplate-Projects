@@ -918,9 +918,6 @@
     <ClInclude Include="include\glm\vector_relational.hpp">
       <Filter>Header Files\glm</Filter>
     </ClInclude>
-    <ClInclude Include="include\shaders.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\DebugWindow\DebugWindow.h">
       <Filter>Header Files\DebugWindow</Filter>
     </ClInclude>
