@@ -11,6 +11,7 @@
 #include "GLClasses/VBO.h"
 #include "GLClasses/ShaderProgram.h"
 #include "GLClasses/UBO.h"
+#include "GLClasses/IBO.h"
 
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
@@ -20,6 +21,20 @@ const std::string fragshader = "res/default.frag";
 
 int windowWidth = 1000;
 int windowHeight = 1000;
+
+static glm::mat4 getRotMat(double angleXDeg, double angleYDeg, double angleZDeg)
+{
+    glm::mat4 rotationMatrix = glm::mat4(1.0f);
+    float angleXRad = glm::radians(angleXDeg);
+    float angleYRad = glm::radians(angleYDeg);
+    float angleZRad = glm::radians(angleZDeg);
+
+    rotationMatrix = glm::rotate(rotationMatrix, angleXRad, glm::vec3(1.0f, 0.0f, 0.0f));
+    rotationMatrix = glm::rotate(rotationMatrix, angleYRad, glm::vec3(0.0f, 1.0f, 0.0f));
+    rotationMatrix = glm::rotate(rotationMatrix, angleZRad, glm::vec3(0.0f, 0.0f, 1.0f));
+
+    return rotationMatrix;
+}
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -47,12 +62,21 @@ struct Vertex
     glm::vec2 texcoord;
 };
 
-Vertex vertices[4] =
+Vertex vertices[8] =
 {
-    { { -0.5f,  0.5f, 0.0f }, { 1.f, 0.f, 0.f, 1.0f }, { 0.0f, 0.0f } },
-    { { -0.5f, -0.5f, 0.0f }, { 0.f, 1.f, 0.f, 1.0f }, { 0.0f, 0.0f } },
-    { {  0.5f,  0.5f, 0.0f }, { 0.f, 0.f, 1.f, 1.0f }, { 0.0f, 0.0f } },
-    { {  0.5f, -0.5f, 0.0f}, { 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f }},
+    { { -0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Bottom, Back
+    { {  0.5f, -0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Back
+    { {  0.5f, -0.5f,  0.5f }, { 0.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Front
+    { { -0.5f, -0.5f,  0.5f }, { 1.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Bottom, Front
+    { { -0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Back
+    { {  0.5f,  0.5f, -0.5f }, { 1.0f, 0.0f, 1.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Back
+    { {  0.5f,  0.5f,  0.5f }, { 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Front
+    { { -0.5f,  0.5f,  0.5f }, { 0.7f, 0.3f, 0.1f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Front
+};
+
+// Index data for triangle strip
+std::vector<GLuint> indices = {
+    3,2,6,7,4,2,0,3,1,6,5,4,1,0
 };
 
 struct uniformData {
@@ -98,17 +122,23 @@ int main()
     glViewport(0, 0, windowWidth, windowHeight);
     glfwSwapInterval(1);
 
-    // Initialize OpenGL Resources
-    VBO vertex_buffer;
-    vertex_buffer.bind();
-    vertex_buffer.allocate(sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+    glEnable(GL_CULL_FACE);
 
+    // Initialize OpenGL Resources
     ShaderProgram program(vertshader, fragshader);
     if (glGetError() != GL_NO_ERROR) {
         std::cout << "program" << std::endl;
     }
 
     VAO vertex_array;
+    vertex_array.bind();
+    
+    VBO vertex_buffer;
+    vertex_buffer.allocate(sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+
+    IBO index_buffer;
+    index_buffer.allocate(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
+
     vertex_array.specifyAttribute(0, 3, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, position));
     vertex_array.specifyAttribute(1, 4, GL_FLOAT, GL_FALSE,
@@ -130,26 +160,6 @@ int main()
     debugWindow.addSliderFloat("a", a, 0.0f, 1.0f);
     debugWindow.addSpacing();
 
-    debugWindow.addSliderFloat("x", vertices[0].position.x, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("y", vertices[0].position.y, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("z", vertices[0].position.z, -1.0f, 1.0f);
-    debugWindow.addSpacing();
-
-    debugWindow.addSliderFloat("x", vertices[1].position.x, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("y", vertices[1].position.y, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("z", vertices[1].position.z, -1.0f, 1.0f);
-    debugWindow.addSpacing();
-
-    debugWindow.addSliderFloat("x", vertices[2].position.x, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("y", vertices[2].position.y, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("z", vertices[2].position.z, -1.0f, 1.0f);
-    debugWindow.addSpacing();
-
-    debugWindow.addSliderFloat("x", vertices[3].position.x, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("y", vertices[3].position.y, -1.0f, 1.0f);
-    debugWindow.addSliderFloat("z", vertices[3].position.z, -1.0f, 1.0f);
-    debugWindow.addSpacing();
-
     debugWindow.addButton("Reload Shaders", [&]() {
         reloadShaders = true;
     });
@@ -157,12 +167,7 @@ int main()
 
     UBO<uniformData> ubo(0);
     glm::mat4& mvp = ubo.data()->mvp;
-    mvp = {
-        1.0f, 0.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f, 0.0f,
-        0.0f, 0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 0.0f, 1.0f
-    };
+    mvp = getRotMat(0.0, 0.0, 0.0);
 
     while (!glfwWindowShouldClose(window)) {
 #ifdef DEBUG_WINDOW
@@ -179,6 +184,8 @@ int main()
 
         program.bind();
 
+        glm::mat4& mvp = ubo.data()->mvp;
+        mvp = getRotMat(glfwGetTime() * 8.4, glfwGetTime() * 4.3, glfwGetTime() * 2.3);
         ubo.data()->time = glfwGetTime();
         ubo.uploadData();
 
@@ -189,7 +196,7 @@ int main()
         vertex_buffer.update(0, sizeof(vertices), vertices);
 
         vertex_array.bind();
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

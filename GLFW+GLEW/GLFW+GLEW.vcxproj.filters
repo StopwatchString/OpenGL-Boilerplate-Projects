@@ -978,6 +978,9 @@
     <ClInclude Include="include\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\GLClasses\IBO.h">
+      <Filter>Header Files\GLClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\glm\detail\func_common.inl">
@@ -1457,6 +1460,9 @@
       <Filter>Source Files\GLClasses</Filter>
     </ClCompile>
     <ClCompile Include="src\GLClasses\ShaderProgram.cpp">
+      <Filter>Source Files\GLClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GLClasses\IBO.cpp">
       <Filter>Source Files\GLClasses</Filter>
     </ClCompile>
   </ItemGroup>
