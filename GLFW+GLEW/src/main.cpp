@@ -12,21 +12,27 @@
 #include "GLClasses/ShaderProgram.h"
 #include "GLClasses/UBO.h"
 
+#define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
 
 const std::string vertshader = "res/default.vert";
 const std::string fragshader = "res/default.frag";
 
-void error_callback(int error, const char* description)
+static void glfw_error_callback(int error, const char* description)
 {
     std::cerr << "Error: " << description << '\n';
 }
 
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
+}
+
+static void glfw_window_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height); // TODO:: DebugWindow needs a patch to not interrupt outside GLFW callbacks
 }
 
 struct Vertex
@@ -56,7 +62,7 @@ int main()
         return EXIT_FAILURE;
     }
 
-    glfwSetErrorCallback(error_callback);
+    glfwSetErrorCallback(glfw_error_callback);
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -69,7 +75,9 @@ int main()
         glfwTerminate();
         return EXIT_FAILURE;
     }
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetKeyCallback(window, glfw_key_callback);
+    glfwSetWindowAspectRatio(window, 16, 9);
+    glfwSetWindowSizeCallback(window, glfw_window_size_callback);
 
     glfwMakeContextCurrent(window);
 
@@ -104,15 +112,17 @@ int main()
     vertex_array.specifyAttribute(2, 2, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, texcoord));
 
-    DebugWindowGLFW debugWindow;
-
     float r = 1.0f;
-    debugWindow.addSliderFloat("r", r, 0.0f, 1.0f);
     float g = 1.0f;
-    debugWindow.addSliderFloat("g", g, 0.0f, 1.0f);
     float b = 1.0f;
-    debugWindow.addSliderFloat("b", b, 0.0f, 1.0f);
     float a = 1.0f;
+    bool reloadShaders = false;
+
+#ifdef DEBUG_WINDOW
+    DebugWindowGLFW debugWindow;
+    debugWindow.addSliderFloat("r", r, 0.0f, 1.0f);
+    debugWindow.addSliderFloat("g", g, 0.0f, 1.0f);
+    debugWindow.addSliderFloat("b", b, 0.0f, 1.0f);
     debugWindow.addSliderFloat("a", a, 0.0f, 1.0f);
     debugWindow.addSpacing();
 
@@ -136,10 +146,10 @@ int main()
     debugWindow.addSliderFloat("z", vertices[3].position.z, -1.0f, 1.0f);
     debugWindow.addSpacing();
 
-    bool reloadShaders = false;
     debugWindow.addButton("Reload Shaders", [&]() {
         reloadShaders = true;
     });
+#endif
 
     UBO<uniformData> ubo(0);
     glm::mat4& mvp = ubo.data()->mvp;
@@ -151,10 +161,15 @@ int main()
     };
 
     while (!glfwWindowShouldClose(window)) {
+#ifdef DEBUG_WINDOW
         if (reloadShaders) {
             program.reloadShaders();
             reloadShaders = false;
         }
+        if (debugWindow.isWindowOpen()) {
+            debugWindow.draw();
+        }
+#endif
 
         program.bind();
 
@@ -169,10 +184,6 @@ int main()
 
         vertex_array.bind();
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-        if (debugWindow.isWindowOpen()) {
-            debugWindow.draw();
-        }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
