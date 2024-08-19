@@ -6,16 +6,19 @@ layout (location = 1) in vec4 a_color;
 layout (location = 2) in vec3 a_texcoord;
 
 // Out params
-out vec4 color;
+out vec4 frag_color;
+out float frag_time;
 
 // Uniforms
 layout(std140, binding = 0) uniform MatrixBlock
 {
     mat4 MVP;
+    float time;
 };
 
 void main()
 {
     gl_Position = MVP * vec4(a_position.x, a_position.y, a_position.z, 1.0);
-    color = a_color;
+    frag_color = a_color;
+    frag_time = time;
 }

@@ -29,12 +29,12 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     }
 }
 
-typedef struct Vertex
+struct Vertex
 {
     glm::vec3 position;
     glm::vec4 color;
     glm::vec2 texcoord;
-} Vertex;
+};
 
 Vertex vertices[4] =
 {
@@ -42,6 +42,11 @@ Vertex vertices[4] =
     { { -0.5f, -0.5f, 0.0f }, { 0.f, 1.f, 0.f, 1.0f }, { 0.0f, 0.0f } },
     { {  0.5f,  0.5f, 0.0f }, { 0.f, 0.f, 1.f, 1.0f }, { 0.0f, 0.0f } },
     { {  0.5f, -0.5f, 0.0f}, { 0.5f, 0.5f, 0.5f, 1.0f }, { 0.0f, 0.0f }},
+};
+
+struct uniformData {
+    glm::mat4 mvp;
+    glm::float32_t time;
 };
 
 int main()
@@ -136,6 +141,15 @@ int main()
         reloadShaders = true;
     });
 
+    UBO<uniformData> ubo(0);
+    glm::mat4& mvp = ubo.data()->mvp;
+    mvp = {
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
+    };
+
     while (!glfwWindowShouldClose(window)) {
         if (reloadShaders) {
             program.reloadShaders();
@@ -144,15 +158,8 @@ int main()
 
         program.bind();
 
-        UBO<glm::mat4> mvpUBO(0);
-        glm::mat4& mvp = *mvpUBO.data();
-        mvp = {
-            1.0f, 0.0f, 0.0f, 0.0f,
-            0.0f, 1.0f, 0.0f, 0.0f,
-            0.0f, 0.0f, 1.0f, 0.0f,
-            0.0f, 0.0f, 0.0f, 1.0f
-        };
-        mvpUBO.uploadData();
+        ubo.data()->time = glfwGetTime();
+        ubo.uploadData();
 
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
