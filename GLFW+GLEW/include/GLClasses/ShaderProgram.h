@@ -32,8 +32,8 @@ private:
     void createProgram();
 
     GLuint m_Handle = 0;
-    const std::string m_VertexSourceFile;
-    const std::string m_FragmentSourceFile;
+    std::string m_VertexSourceFile;
+    std::string m_FragmentSourceFile;
 };
 
 #endif

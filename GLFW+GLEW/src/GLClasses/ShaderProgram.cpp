@@ -14,8 +14,10 @@ ShaderProgram::~ShaderProgram()
 }
 
 ShaderProgram::ShaderProgram(ShaderProgram&& other) noexcept
+    : m_Handle(other.m_Handle)
+    , m_VertexSourceFile(std::move(other.m_VertexSourceFile))
+    , m_FragmentSourceFile(std::move(other.m_FragmentSourceFile))
 {
-    m_Handle = other.m_Handle;
     other.m_Handle = 0;
 }
 
@@ -23,6 +25,9 @@ ShaderProgram& ShaderProgram::operator=(ShaderProgram&& other) noexcept
 {
     if (this != &other) {
         m_Handle = other.m_Handle;
+        m_VertexSourceFile = std::move(other.m_VertexSourceFile);
+        m_FragmentSourceFile = std::move(other.m_FragmentSourceFile);
+
         other.m_Handle = 0;
     }
     return *this;

@@ -11,8 +11,8 @@ VAO::~VAO()
 }
 
 VAO::VAO(VAO&& other) noexcept
+    : m_Handle(other.m_Handle)
 {
-    m_Handle = other.m_Handle;
     other.m_Handle = 0;
 }
 

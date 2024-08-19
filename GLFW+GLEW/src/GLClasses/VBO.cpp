@@ -12,12 +12,11 @@ VBO::~VBO()
 }
 
 VBO::VBO(VBO&& other) noexcept
+    : m_Handle(other.m_Handle)
+    , m_Size(other.m_Size)
+    , m_Usage(other.m_Usage)
+    , m_Allocated(other.m_Allocated)
 {
-    m_Handle = other.m_Handle;
-    m_Size = other.m_Size;
-    m_Usage = other.m_Usage;
-    m_Allocated = other.m_Allocated;
-
     other.m_Handle = 0;
     other.m_Size = 0;
     other.m_Usage = 0;
@@ -48,12 +47,10 @@ void VBO::bind()
 void VBO::allocate(GLsizeiptr size, const void* data, GLenum usage)
 {
     glBindBuffer(GL_ARRAY_BUFFER, m_Handle);
+    glBufferData(GL_ARRAY_BUFFER, size, data, usage);
 
     m_Size = size;
     m_Usage = usage;
-
-    glBufferData(GL_ARRAY_BUFFER, size, data, usage);
-
     m_Allocated = true;
 }
 
