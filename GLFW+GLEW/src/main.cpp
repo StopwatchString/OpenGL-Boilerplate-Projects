@@ -18,13 +18,14 @@
 
 void error_callback(int error, const char* description)
 {
-    fprintf(stderr, "Error: %s\n", description);
+    std::cerr << "Error: " << description << '\n';
 }
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
+    }
 }
 
 typedef struct Vertex
@@ -70,7 +71,7 @@ int main()
     if (GLEW_OK != err) {
         std::cerr << "Error: " << glewGetErrorString(err) << std::endl;
         glfwTerminate();
-        return -1;
+        return EXIT_FAILURE;
     }
 
     int width, height;
@@ -139,8 +140,6 @@ int main()
 
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
-
-
 
         vertex_buffer.bind();
         vertex_buffer.update(0, sizeof(vertices), vertices);
