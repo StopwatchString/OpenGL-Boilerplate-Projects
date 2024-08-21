@@ -34,6 +34,9 @@
     <Filter Include="Source Files\GLClasses">
       <UniqueIdentifier>{fd76c3b2-e109-44b1-ac31-d4eb717ca65a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\glhelpers">
+      <UniqueIdentifier>{71fbeb5d-a05a-4385-8ad4-586bb98c159d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GL\eglew.h">
@@ -980,6 +983,21 @@
     </ClInclude>
     <ClInclude Include="include\GLClasses\IBO.h">
       <Filter>Header Files\GLClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glhelpers\ShaderProgram.h">
+      <Filter>Header Files\glhelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glhelpers\UBO.h">
+      <Filter>Header Files\glhelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glhelpers\VAO.h">
+      <Filter>Header Files\glhelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glhelpers\VBO.h">
+      <Filter>Header Files\glhelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glhelpers\IBO.h">
+      <Filter>Header Files\glhelpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
