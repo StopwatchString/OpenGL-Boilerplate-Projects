@@ -196,7 +196,7 @@ int main()
     GLuint uniform_buffer;
     gltk::UBO::create(uniform_buffer);
     gltk::UBO::bind(uniform_buffer);
-    gltk::UBO::allocateBuffer(sizeof(data), &data, GL_DYNAMIC_DRAW);
+    gltk::UBO::allocateBuffer(sizeof(data), &data, GL_DYNAMIC_DRAW, uniform_buffer);
     gltk::UBO::bindBufferBase(0, uniform_buffer);
 
     while (!glfwWindowShouldClose(window)) {
@@ -220,7 +220,7 @@ int main()
         data.mvp = getRotMat(xRot, yRot, zRot);
         data.time = glfwGetTime();
         
-        gltk::UBO::updateBuffer(0, sizeof(uniformData), &data);
+        gltk::UBO::updateBuffer(0, sizeof(uniformData), &data, uniform_buffer);
 
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
