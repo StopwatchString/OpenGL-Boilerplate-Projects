@@ -30,7 +30,7 @@ DebugInfoVAO* DebugInfoVAO::instance = nullptr;
 
 static DebugInfoVAO* debugInfoVAO = DebugInfoVAO::getInstance();
 
-#define VERIFY_VAO(expectedBoundVAO, funcName)                                             \
+#define VERIFY_BOUND_VAO(expectedBoundVAO, funcName)                                             \
 do {                                                                                       \
     if (expectedBoundVAO == 0) continue;                                                   \
     if (expectedBoundVAO != debugInfoVAO->currentlyBoundVAO) {                             \
@@ -44,7 +44,7 @@ do {                                                                            
 
 #else
 
-#define VERIFY_VAO(expectedBoundVAO, funcName)
+#define VERIFY_BOUND_VAO(expectedBoundVAO, funcName)
 #define TRACK_BOUND_VAO(newVAO)
 
 #endif
@@ -76,19 +76,19 @@ namespace VAO {
     }
 
     inline void enableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0) {
-        VERIFY_VAO(expectedBoundVAO, "enableVertexAttribArray");
+        VERIFY_BOUND_VAO(expectedBoundVAO, "enableVertexAttribArray");
 
         glEnableVertexAttribArray(index);
     }
 
     inline void disableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0) {
-        VERIFY_VAO(expectedBoundVAO, "disableVertexAttribArray");
+        VERIFY_BOUND_VAO(expectedBoundVAO, "disableVertexAttribArray");
 
         glDisableVertexAttribArray(index);
     }
 
     inline void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer, GLuint expectedBoundVAO = 0) {
-        VERIFY_VAO(expectedBoundVAO, "vertexAttribPointer");
+        VERIFY_BOUND_VAO(expectedBoundVAO, "vertexAttribPointer");
 
         glVertexAttribPointer(index, size, type, normalized, stride, pointer);
     }
