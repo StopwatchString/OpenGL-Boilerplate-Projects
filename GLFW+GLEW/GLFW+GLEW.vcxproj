@@ -620,6 +620,11 @@
     <ClCompile Include="src\GLClasses\ShaderProgram.cpp" />
     <ClCompile Include="src\GLClasses\VAO.cpp" />
     <ClCompile Include="src\GLClasses\VBO.cpp" />
+    <ClCompile Include="src\gltk\IBO.cpp" />
+    <ClCompile Include="src\gltk\ShaderProgram.cpp" />
+    <ClCompile Include="src\gltk\UBO.cpp" />
+    <ClCompile Include="src\gltk\VAO.cpp" />
+    <ClCompile Include="src\gltk\VBO.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

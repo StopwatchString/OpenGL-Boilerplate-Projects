@@ -37,6 +37,9 @@
     <Filter Include="Header Files\gltk">
       <UniqueIdentifier>{7b9f0c1a-318f-439b-b646-61c28b72be6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gltk">
+      <UniqueIdentifier>{f360d798-f2cc-4e0e-a766-2a37ced3bfd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GL\eglew.h">
@@ -1482,6 +1485,21 @@
     </ClCompile>
     <ClCompile Include="src\GLClasses\IBO.cpp">
       <Filter>Source Files\GLClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gltk\ShaderProgram.cpp">
+      <Filter>Source Files\gltk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gltk\UBO.cpp">
+      <Filter>Source Files\gltk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gltk\VAO.cpp">
+      <Filter>Source Files\gltk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gltk\VBO.cpp">
+      <Filter>Source Files\gltk</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gltk\IBO.cpp">
+      <Filter>Source Files\gltk</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
