@@ -9,11 +9,11 @@
 
 #include "GLClasses/ShaderProgram.h"
 #include "GLClasses/UBO.h"
-#include "GLClasses/IBO.h"
 
 #include "gltk/VAO.h"
 #include "gltk/VBO.h"
 #include "gltk/EBO.h"
+#include "gltk/UBO.h"
 
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
