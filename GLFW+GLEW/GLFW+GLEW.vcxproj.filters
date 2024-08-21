@@ -978,9 +978,6 @@
     <ClInclude Include="include\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GLClasses\IBO.h">
-      <Filter>Header Files\GLClasses</Filter>
-    </ClInclude>
     <ClInclude Include="include\gltk\UBO.h">
       <Filter>Header Files\gltk</Filter>
     </ClInclude>
@@ -1469,9 +1466,6 @@
       <Filter>Source Files\DebugWindow</Filter>
     </ClCompile>
     <ClCompile Include="src\GLClasses\ShaderProgram.cpp">
-      <Filter>Source Files\GLClasses</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GLClasses\IBO.cpp">
       <Filter>Source Files\GLClasses</Filter>
     </ClCompile>
     <ClCompile Include="src\gltk\ShaderProgram.cpp">
