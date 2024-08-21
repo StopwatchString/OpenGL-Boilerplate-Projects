@@ -7,12 +7,13 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
-#include "GLClasses/ShaderProgram.h"
-
 #include "gltk/VAO.h"
 #include "gltk/VBO.h"
 #include "gltk/EBO.h"
 #include "gltk/UBO.h"
+#include "gltk/ShaderProgram.h"
+
+#include "utils.h"
 
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
@@ -126,10 +127,8 @@ int main()
     glEnable(GL_CULL_FACE);
 
     // Initialize OpenGL Resources
-    ShaderProgram program(vertshader, fragshader);
-    if (glGetError() != GL_NO_ERROR) {
-        std::cout << "program" << std::endl;
-    }
+    GLuint shader_program;
+    gltk::ShaderProgram::create(shader_program, loadFile(vertshader), loadFile(fragshader));
 
     GLuint vertex_array;
     gltk::VAO::create(vertex_array);
@@ -203,7 +202,7 @@ int main()
     while (!glfwWindowShouldClose(window)) {
 #ifdef DEBUG_WINDOW
         if (reloadShaders) {
-            program.reloadShaders();
+            // impl later
             reloadShaders = false;
         }
         if (debugWindow.isWindowOpen()) {
@@ -213,7 +212,7 @@ int main()
 
         glViewport(0, 0, windowWidth, windowHeight);
 
-        program.bind();
+        gltk::ShaderProgram::bind(shader_program);
 
         xRot += xRotSpeed;
         yRot += yRotSpeed;

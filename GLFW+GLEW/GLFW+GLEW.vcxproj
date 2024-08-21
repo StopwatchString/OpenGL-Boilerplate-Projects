@@ -152,8 +152,6 @@
     <ClInclude Include="include\DebugWindow\imstb_rectpack.h" />
     <ClInclude Include="include\DebugWindow\imstb_textedit.h" />
     <ClInclude Include="include\DebugWindow\imstb_truetype.h" />
-    <ClInclude Include="include\GLClasses\ShaderProgram.h" />
-    <ClInclude Include="include\GLClasses\UBO.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\GLFW\glfw3native.h" />
     <ClInclude Include="include\glm\common.hpp" />
@@ -613,7 +611,6 @@
     <ClCompile Include="src\DebugWindow\imgui_widgets.cpp" />
     <ClCompile Include="src\DebugWindow\implot.cpp" />
     <ClCompile Include="src\DebugWindow\implot_items.cpp" />
-    <ClCompile Include="src\GLClasses\ShaderProgram.cpp" />
     <ClCompile Include="src\gltk\EBO.cpp" />
     <ClCompile Include="src\gltk\ShaderProgram.cpp" />
     <ClCompile Include="src\gltk\UBO.cpp" />

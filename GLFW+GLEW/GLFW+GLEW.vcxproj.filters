@@ -28,12 +28,6 @@
     <Filter Include="Source Files\DebugWindow">
       <UniqueIdentifier>{d728afe9-ba50-4b56-a9ad-7355c95787f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GLClasses">
-      <UniqueIdentifier>{c925f372-ee4b-44fc-8de6-b14c0fe3d025}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GLClasses">
-      <UniqueIdentifier>{fd76c3b2-e109-44b1-ac31-d4eb717ca65a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\gltk">
       <UniqueIdentifier>{7b9f0c1a-318f-439b-b646-61c28b72be6a}</UniqueIdentifier>
     </Filter>
@@ -969,12 +963,6 @@
     <ClInclude Include="include\DebugWindow\imstb_truetype.h">
       <Filter>Header Files\DebugWindow</Filter>
     </ClInclude>
-    <ClInclude Include="include\GLClasses\ShaderProgram.h">
-      <Filter>Header Files\GLClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GLClasses\UBO.h">
-      <Filter>Header Files\GLClasses</Filter>
-    </ClInclude>
     <ClInclude Include="include\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1464,9 +1452,6 @@
     </ClCompile>
     <ClCompile Include="src\DebugWindow\DebugWindow.cpp">
       <Filter>Source Files\DebugWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GLClasses\ShaderProgram.cpp">
-      <Filter>Source Files\GLClasses</Filter>
     </ClCompile>
     <ClCompile Include="src\gltk\ShaderProgram.cpp">
       <Filter>Source Files\gltk</Filter>
