@@ -155,8 +155,6 @@
     <ClInclude Include="include\GLClasses\IBO.h" />
     <ClInclude Include="include\GLClasses\ShaderProgram.h" />
     <ClInclude Include="include\GLClasses\UBO.h" />
-    <ClInclude Include="include\GLClasses\VAO.h" />
-    <ClInclude Include="include\GLClasses\VBO.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\GLFW\glfw3native.h" />
     <ClInclude Include="include\glm\common.hpp" />
@@ -447,7 +445,7 @@
     <ClInclude Include="include\glm\vec3.hpp" />
     <ClInclude Include="include\glm\vec4.hpp" />
     <ClInclude Include="include\glm\vector_relational.hpp" />
-    <ClInclude Include="include\gltk\IBO.h" />
+    <ClInclude Include="include\gltk\EBO.h" />
     <ClInclude Include="include\gltk\ShaderProgram.h" />
     <ClInclude Include="include\gltk\UBO.h" />
     <ClInclude Include="include\gltk\VAO.h" />
@@ -618,9 +616,7 @@
     <ClCompile Include="src\DebugWindow\implot_items.cpp" />
     <ClCompile Include="src\GLClasses\IBO.cpp" />
     <ClCompile Include="src\GLClasses\ShaderProgram.cpp" />
-    <ClCompile Include="src\GLClasses\VAO.cpp" />
-    <ClCompile Include="src\GLClasses\VBO.cpp" />
-    <ClCompile Include="src\gltk\IBO.cpp" />
+    <ClCompile Include="src\gltk\EBO.cpp" />
     <ClCompile Include="src\gltk\ShaderProgram.cpp" />
     <ClCompile Include="src\gltk\UBO.cpp" />
     <ClCompile Include="src\gltk\VAO.cpp" />

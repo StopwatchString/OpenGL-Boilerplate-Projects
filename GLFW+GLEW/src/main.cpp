@@ -13,6 +13,7 @@
 
 #include "gltk/VAO.h"
 #include "gltk/VBO.h"
+#include "gltk/EBO.h"
 
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
@@ -140,8 +141,10 @@ int main()
     gltk::VBO::bind(vertex_buffer);
     gltk::VBO::allocateBuffer(sizeof(Vertex) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW, vertex_buffer);
 
-    IBO index_buffer;
-    index_buffer.allocate(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
+    GLuint element_buffer;
+    gltk::EBO::create(element_buffer);
+    gltk::EBO::bind(element_buffer);
+    gltk::EBO::allocateBuffer(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
     gltk::VAO::enableVertexAttribArray(0, vertex_array);
     gltk::VAO::vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,

@@ -969,12 +969,6 @@
     <ClInclude Include="include\DebugWindow\imstb_truetype.h">
       <Filter>Header Files\DebugWindow</Filter>
     </ClInclude>
-    <ClInclude Include="include\GLClasses\VAO.h">
-      <Filter>Header Files\GLClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GLClasses\VBO.h">
-      <Filter>Header Files\GLClasses</Filter>
-    </ClInclude>
     <ClInclude Include="include\GLClasses\ShaderProgram.h">
       <Filter>Header Files\GLClasses</Filter>
     </ClInclude>
@@ -996,7 +990,7 @@
     <ClInclude Include="include\gltk\VBO.h">
       <Filter>Header Files\gltk</Filter>
     </ClInclude>
-    <ClInclude Include="include\gltk\IBO.h">
+    <ClInclude Include="include\gltk\EBO.h">
       <Filter>Header Files\gltk</Filter>
     </ClInclude>
     <ClInclude Include="include\gltk\ShaderProgram.h">
@@ -1474,12 +1468,6 @@
     <ClCompile Include="src\DebugWindow\DebugWindow.cpp">
       <Filter>Source Files\DebugWindow</Filter>
     </ClCompile>
-    <ClCompile Include="src\GLClasses\VAO.cpp">
-      <Filter>Source Files\GLClasses</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GLClasses\VBO.cpp">
-      <Filter>Source Files\GLClasses</Filter>
-    </ClCompile>
     <ClCompile Include="src\GLClasses\ShaderProgram.cpp">
       <Filter>Source Files\GLClasses</Filter>
     </ClCompile>
@@ -1498,7 +1486,7 @@
     <ClCompile Include="src\gltk\VBO.cpp">
       <Filter>Source Files\gltk</Filter>
     </ClCompile>
-    <ClCompile Include="src\gltk\IBO.cpp">
+    <ClCompile Include="src\gltk\EBO.cpp">
       <Filter>Source Files\gltk</Filter>
     </ClCompile>
   </ItemGroup>
