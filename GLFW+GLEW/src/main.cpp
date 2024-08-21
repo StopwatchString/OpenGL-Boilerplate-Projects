@@ -12,7 +12,7 @@
 #include "GLClasses/UBO.h"
 #include "GLClasses/IBO.h"
 
-#include "glhelpers/VAO.h"
+#include "gltk/VAO.h"
 
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"

@@ -34,8 +34,8 @@
     <Filter Include="Source Files\GLClasses">
       <UniqueIdentifier>{fd76c3b2-e109-44b1-ac31-d4eb717ca65a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\glhelpers">
-      <UniqueIdentifier>{71fbeb5d-a05a-4385-8ad4-586bb98c159d}</UniqueIdentifier>
+    <Filter Include="Header Files\gltk">
+      <UniqueIdentifier>{7b9f0c1a-318f-439b-b646-61c28b72be6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -984,20 +984,20 @@
     <ClInclude Include="include\GLClasses\IBO.h">
       <Filter>Header Files\GLClasses</Filter>
     </ClInclude>
-    <ClInclude Include="include\glhelpers\ShaderProgram.h">
-      <Filter>Header Files\glhelpers</Filter>
+    <ClInclude Include="include\gltk\UBO.h">
+      <Filter>Header Files\gltk</Filter>
     </ClInclude>
-    <ClInclude Include="include\glhelpers\UBO.h">
-      <Filter>Header Files\glhelpers</Filter>
+    <ClInclude Include="include\gltk\VAO.h">
+      <Filter>Header Files\gltk</Filter>
     </ClInclude>
-    <ClInclude Include="include\glhelpers\VAO.h">
-      <Filter>Header Files\glhelpers</Filter>
+    <ClInclude Include="include\gltk\VBO.h">
+      <Filter>Header Files\gltk</Filter>
     </ClInclude>
-    <ClInclude Include="include\glhelpers\VBO.h">
-      <Filter>Header Files\glhelpers</Filter>
+    <ClInclude Include="include\gltk\IBO.h">
+      <Filter>Header Files\gltk</Filter>
     </ClInclude>
-    <ClInclude Include="include\glhelpers\IBO.h">
-      <Filter>Header Files\glhelpers</Filter>
+    <ClInclude Include="include\gltk\ShaderProgram.h">
+      <Filter>Header Files\gltk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

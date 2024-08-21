@@ -159,11 +159,6 @@
     <ClInclude Include="include\GLClasses\VBO.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\GLFW\glfw3native.h" />
-    <ClInclude Include="include\glhelpers\IBO.h" />
-    <ClInclude Include="include\glhelpers\ShaderProgram.h" />
-    <ClInclude Include="include\glhelpers\UBO.h" />
-    <ClInclude Include="include\glhelpers\VAO.h" />
-    <ClInclude Include="include\glhelpers\VBO.h" />
     <ClInclude Include="include\glm\common.hpp" />
     <ClInclude Include="include\glm\detail\compute_common.hpp" />
     <ClInclude Include="include\glm\detail\compute_vector_decl.hpp" />
@@ -452,6 +447,11 @@
     <ClInclude Include="include\glm\vec3.hpp" />
     <ClInclude Include="include\glm\vec4.hpp" />
     <ClInclude Include="include\glm\vector_relational.hpp" />
+    <ClInclude Include="include\gltk\IBO.h" />
+    <ClInclude Include="include\gltk\ShaderProgram.h" />
+    <ClInclude Include="include\gltk\UBO.h" />
+    <ClInclude Include="include\gltk\VAO.h" />
+    <ClInclude Include="include\gltk\VBO.h" />
     <ClInclude Include="include\GL\eglew.h" />
     <ClInclude Include="include\GL\glew.h" />
     <ClInclude Include="include\GL\glxew.h" />
