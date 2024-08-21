@@ -132,8 +132,8 @@ int main()
     }
 
     GLuint vertex_array;
-    glhelpers::VAO::create(vertex_array);
-    glhelpers::VAO::bind(vertex_array);
+    gltk::VAO::create(vertex_array);
+    gltk::VAO::bind(vertex_array);
 
     VBO vertex_buffer;
     vertex_buffer.allocate(sizeof(Vertex) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW);
@@ -141,14 +141,14 @@ int main()
     IBO index_buffer;
     index_buffer.allocate(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
-    glhelpers::VAO::enableVertexAttribArray(0, vertex_array);
-    glhelpers::VAO::vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+    gltk::VAO::enableVertexAttribArray(0, vertex_array);
+    gltk::VAO::vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, position), vertex_array);
-    glhelpers::VAO::enableVertexAttribArray(1, vertex_array);
-    glhelpers::VAO::vertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
+    gltk::VAO::enableVertexAttribArray(1, vertex_array);
+    gltk::VAO::vertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, color), vertex_array);
-    glhelpers::VAO::enableVertexAttribArray(2, vertex_array);
-    glhelpers::VAO::vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+    gltk::VAO::enableVertexAttribArray(2, vertex_array);
+    gltk::VAO::vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, texcoord), vertex_array);
 
     float r = 1.0f;
@@ -220,7 +220,7 @@ int main()
         vertex_buffer.bind();
         vertex_buffer.update(0, sizeof(Vertex) * vertices.size(), vertices.data());
 
-        glhelpers::VAO::bind(vertex_array);
+        gltk::VAO::bind(vertex_array);
         glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(window);

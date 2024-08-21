@@ -1,5 +1,5 @@
-#ifndef GLHELPERS_VAO_H
-#define GLHELPERS_VAO_H
+#ifndef gltk_VAO_H
+#define gltk_VAO_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
@@ -32,8 +32,9 @@ static DebugInfoVAO* debugInfoVAO = DebugInfoVAO::getInstance();
 do {                                                                                       \
     if (expectedBoundVAO == 0) continue;                                                   \
     if (expectedBoundVAO != debugInfoVAO->currentlyBoundVAO) {                             \
-        std::cerr << "glhelpers::" << funcName << "() Bound VAO expected=" <<              \
-            expectedBoundVAO << " Bound VAO current=" << debugInfoVAO->currentlyBoundVAO;  \
+        std::cerr << "gltk::VAO::" << funcName << "()"                                \
+            << " VAO expected=" <<  expectedBoundVAO                                       \
+            << " VAO current=" << debugInfoVAO->currentlyBoundVAO << '\n';                 \
     }                                                                                      \
 } while(0)
 
@@ -46,7 +47,7 @@ do {                                                                            
 
 #endif
 
-namespace glhelpers {
+namespace gltk {
 namespace VAO {
 
 
