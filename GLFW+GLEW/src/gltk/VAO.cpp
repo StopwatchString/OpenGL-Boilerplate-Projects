@@ -47,42 +47,41 @@ do {                                                                            
 
 namespace gltk {
     namespace VAO {
-
-        inline void create(GLuint& VAO) {
+        void create(GLuint& VAO) {
             glGenVertexArrays(1, &VAO);
         }
 
-        inline void create(GLsizei num, GLuint* VAOArray) {
+        void create(GLsizei num, GLuint* VAOArray) {
             glGenVertexArrays(num, VAOArray);
         }
 
-        inline void destroy(GLuint& VAO) {
+        void destroy(GLuint& VAO) {
             glDeleteVertexArrays(1, &VAO);
         }
 
-        inline void destroy(GLsizei num, GLuint* VAOArray) {
+        void destroy(GLsizei num, GLuint* VAOArray) {
             glDeleteVertexArrays(num, VAOArray);
         }
 
-        inline void bind(GLuint VAO) {
+        void bind(GLuint VAO) {
             TRACK_BOUND_VAO(VAO);
 
             glBindVertexArray(VAO);
         }
 
-        inline void enableVertexAttribArray(GLuint index, GLuint expectedBoundVAO) {
+        void enableVertexAttribArray(GLuint index, GLuint expectedBoundVAO) {
             VERIFY_BOUND_VAO(expectedBoundVAO, "enableVertexAttribArray");
 
             glEnableVertexAttribArray(index);
         }
 
-        inline void disableVertexAttribArray(GLuint index, GLuint expectedBoundVAO) {
+        void disableVertexAttribArray(GLuint index, GLuint expectedBoundVAO) {
             VERIFY_BOUND_VAO(expectedBoundVAO, "disableVertexAttribArray");
 
             glDisableVertexAttribArray(index);
         }
 
-        inline void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer, GLuint expectedBoundVAO) {
+        void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer, GLuint expectedBoundVAO) {
             VERIFY_BOUND_VAO(expectedBoundVAO, "vertexAttribPointer");
 
             glVertexAttribPointer(index, size, type, normalized, stride, pointer);

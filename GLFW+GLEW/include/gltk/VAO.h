@@ -6,17 +6,17 @@
 
 namespace gltk {
     namespace VAO {
-        inline void create(GLuint& VAO);
-        inline void create(GLsizei num, GLuint* VAOArray);
+        void create(GLuint& VAO);
+        void create(GLsizei num, GLuint* VAOArray);
 
-        inline void destroy(GLuint& VAO);
-        inline void destroy(GLsizei num, GLuint* VAOArray);
+        void destroy(GLuint& VAO);
+        void destroy(GLsizei num, GLuint* VAOArray);
         
-        inline void bind(GLuint VAO);
+        void bind(GLuint VAO);
         
-        inline void enableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0);
-        inline void disableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0);
-        inline void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer, GLuint expectedBoundVAO = 0);
+        void enableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0);
+        void disableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0);
+        void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer, GLuint expectedBoundVAO = 0);
     }
 }
 

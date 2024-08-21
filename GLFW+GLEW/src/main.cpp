@@ -7,12 +7,12 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
-#include "GLClasses/VBO.h"
 #include "GLClasses/ShaderProgram.h"
 #include "GLClasses/UBO.h"
 #include "GLClasses/IBO.h"
 
 #include "gltk/VAO.h"
+#include "gltk/VBO.h"
 
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
@@ -135,8 +135,10 @@ int main()
     gltk::VAO::create(vertex_array);
     gltk::VAO::bind(vertex_array);
 
-    VBO vertex_buffer;
-    vertex_buffer.allocate(sizeof(Vertex) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW);
+    GLuint vertex_buffer;
+    gltk::VBO::create(vertex_buffer);
+    gltk::VBO::bind(vertex_buffer);
+    gltk::VBO::allocateBuffer(sizeof(Vertex) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW, vertex_buffer);
 
     IBO index_buffer;
     index_buffer.allocate(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
@@ -217,8 +219,8 @@ int main()
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        vertex_buffer.bind();
-        vertex_buffer.update(0, sizeof(Vertex) * vertices.size(), vertices.data());
+        gltk::VBO::bind(vertex_buffer);
+        gltk::VBO::updateBuffer(0, sizeof(Vertex) * vertices.size(), vertices.data(), vertex_buffer);
 
         gltk::VAO::bind(vertex_array);
         glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, 0);
