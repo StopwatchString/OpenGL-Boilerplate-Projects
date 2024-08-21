@@ -8,7 +8,6 @@
 #include "GLFW/glfw3.h"
 
 #include "GLClasses/ShaderProgram.h"
-#include "GLClasses/UBO.h"
 
 #include "gltk/VAO.h"
 #include "gltk/VBO.h"
@@ -192,9 +191,14 @@ int main()
     });
 #endif
 
-    UBO<uniformData> ubo(0);
-    glm::mat4& mvp = ubo.data()->mvp;
-    mvp = getRotMat(0.0, 0.0, 0.0);
+    uniformData data;
+    data.mvp = getRotMat(0.0f, 0.0f, 0.0f);
+
+    GLuint uniform_buffer;
+    gltk::UBO::create(uniform_buffer);
+    gltk::UBO::bind(uniform_buffer);
+    gltk::UBO::allocateBuffer(sizeof(data), &data, GL_DYNAMIC_DRAW);
+    gltk::UBO::bindBufferBase(0, uniform_buffer);
 
     while (!glfwWindowShouldClose(window)) {
 #ifdef DEBUG_WINDOW
@@ -214,10 +218,10 @@ int main()
         xRot += xRotSpeed;
         yRot += yRotSpeed;
         zRot += zRotSpeed;
-        glm::mat4& mvp = ubo.data()->mvp;
-        mvp = getRotMat(xRot, yRot, zRot);
-        ubo.data()->time = glfwGetTime();
-        ubo.uploadData();
+        data.mvp = getRotMat(xRot, yRot, zRot);
+        data.time = glfwGetTime();
+        
+        gltk::UBO::updateBuffer(0, sizeof(uniformData), &data);
 
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);

@@ -1,8 +1,24 @@
-#ifndef GLHELPERS_UBO_H
-#define GLHELPERS_UBO_H
+#ifndef GLTK_UBO_H
+#define GLTK_UBO_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
 
+namespace gltk {
+    namespace UBO {
+        void create(GLuint& UBO);
+        void create(GLsizei num, GLuint* UBOArray);
+
+        void destroy(GLuint& UBO);
+        void destroy(GLsizei num, GLuint* UBOArray);
+
+        void bind(GLuint UBO);
+
+        void allocateBuffer(GLsizeiptr size, const void* data, GLenum usage, GLuint expectedBoundUBO = 0);
+        void updateBuffer(GLintptr offset, GLsizeiptr size, const void* data, GLuint expectedBoundUBO = 0);
+
+        void bindBufferBase(GLuint bindingPoint, GLuint UBO);
+    }
+}
 
 #endif
