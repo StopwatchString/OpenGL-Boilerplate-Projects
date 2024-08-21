@@ -30,7 +30,7 @@ DebugInfoVAO* DebugInfoVAO::instance = nullptr;
 
 static DebugInfoVAO* debugInfoVAO = DebugInfoVAO::getInstance();
 
-#define VERIFY_BOUND_VAO(expectedBoundVAO, funcName)                                             \
+#define VERIFY_BOUND_VAO(expectedBoundVAO, funcName)                                       \
 do {                                                                                       \
     if (expectedBoundVAO == 0) continue;                                                   \
     if (expectedBoundVAO != debugInfoVAO->currentlyBoundVAO) {                             \
@@ -38,9 +38,9 @@ do {                                                                            
             << " VAO expected=" <<  expectedBoundVAO                                       \
             << " VAO current=" << debugInfoVAO->currentlyBoundVAO << '\n';                 \
     }                                                                                      \
-} while(0);
+} while(0)
 
-#define TRACK_BOUND_VAO(newVAO) debugInfoVAO->currentlyBoundVAO = newVAO;
+#define TRACK_BOUND_VAO(newVAO) debugInfoVAO->currentlyBoundVAO = newVAO
 
 #else
 
@@ -70,25 +70,25 @@ namespace VAO {
     }
 
     inline void bind(GLuint VAO) {
-        TRACK_BOUND_VAO(VAO)
+        TRACK_BOUND_VAO(VAO);
 
         glBindVertexArray(VAO);
     }
 
     inline void enableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0) {
-        VERIFY_BOUND_VAO(expectedBoundVAO, "enableVertexAttribArray")
+        VERIFY_BOUND_VAO(expectedBoundVAO, "enableVertexAttribArray");
 
         glEnableVertexAttribArray(index);
     }
 
     inline void disableVertexAttribArray(GLuint index, GLuint expectedBoundVAO = 0) {
-        VERIFY_BOUND_VAO(expectedBoundVAO, "disableVertexAttribArray")
+        VERIFY_BOUND_VAO(expectedBoundVAO, "disableVertexAttribArray");
 
         glDisableVertexAttribArray(index);
     }
 
     inline void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer, GLuint expectedBoundVAO = 0) {
-        VERIFY_BOUND_VAO(expectedBoundVAO, "vertexAttribPointer")
+        VERIFY_BOUND_VAO(expectedBoundVAO, "vertexAttribPointer");
 
         glVertexAttribPointer(index, size, type, normalized, stride, pointer);
     }
