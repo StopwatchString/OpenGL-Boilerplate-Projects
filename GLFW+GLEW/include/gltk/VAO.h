@@ -1,8 +1,10 @@
-#ifndef gltk_VAO_H
-#define gltk_VAO_H
+#ifndef GLTK_VAO_H
+#define GLTK_VAO_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
+
+#include <iostream>
 
 #ifndef NDEBUG
 class DebugInfoVAO {
@@ -32,7 +34,7 @@ static DebugInfoVAO* debugInfoVAO = DebugInfoVAO::getInstance();
 do {                                                                                       \
     if (expectedBoundVAO == 0) continue;                                                   \
     if (expectedBoundVAO != debugInfoVAO->currentlyBoundVAO) {                             \
-        std::cerr << "gltk::VAO::" << funcName << "()"                                \
+        std::cerr << "gltk::VAO::" << funcName << "()"                                     \
             << " VAO expected=" <<  expectedBoundVAO                                       \
             << " VAO current=" << debugInfoVAO->currentlyBoundVAO << '\n';                 \
     }                                                                                      \
