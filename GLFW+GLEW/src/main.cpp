@@ -9,8 +9,6 @@
 
 #include "glh/glh.h"
 
-#include "utils.h"
-
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
 
@@ -132,12 +130,12 @@ int main()
 
     // Initialize OpenGL Resources
     GLuint vertexShader = glh::shader::create(GL_VERTEX_SHADER);
-    const char* vertSource = loadFile(vertSourceFile);
+    const char* vertSource = glh::utils::loadFile(vertSourceFile);
     glh::shader::attachSource(vertexShader, 1, &vertSource, NULL);
     glh::shader::compileShader(vertexShader);
 
     GLuint fragmentShader = glh::shader::create(GL_FRAGMENT_SHADER);
-    const char* fragSource = loadFile(fragSourceFile);
+    const char* fragSource = glh::utils::loadFile(fragSourceFile);
     glh::shader::attachSource(fragmentShader, 1, &fragSource, NULL);
     glh::shader::compileShader(fragmentShader);
     

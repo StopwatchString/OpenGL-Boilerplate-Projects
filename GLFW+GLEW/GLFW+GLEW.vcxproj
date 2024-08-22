@@ -161,6 +161,7 @@
     <ClInclude Include="include\glh\Shader.h" />
     <ClInclude Include="include\glh\Texture.h" />
     <ClInclude Include="include\glh\UBO.h" />
+    <ClInclude Include="include\glh\Utils.h" />
     <ClInclude Include="include\glh\VAO.h" />
     <ClInclude Include="include\glh\VBO.h" />
     <ClInclude Include="include\glm\common.hpp" />
@@ -455,7 +456,6 @@
     <ClInclude Include="include\GL\glew.h" />
     <ClInclude Include="include\GL\glxew.h" />
     <ClInclude Include="include\GL\wglew.h" />
-    <ClInclude Include="include\utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\glm\detail\func_common.inl" />
@@ -620,6 +620,7 @@
     <ClCompile Include="src\glh\Shader.cpp" />
     <ClCompile Include="src\glh\Texture.cpp" />
     <ClCompile Include="src\glh\UBO.cpp" />
+    <ClCompile Include="src\glh\Utils.cpp" />
     <ClCompile Include="src\glh\VAO.cpp" />
     <ClCompile Include="src\glh\VBO.cpp" />
     <ClCompile Include="src\main.cpp" />

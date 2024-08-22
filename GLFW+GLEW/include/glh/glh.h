@@ -8,5 +8,6 @@
 #include "./VBO.h"
 #include "./UBO.h"
 #include "./EBO.h"
+#include "./Utils.h"
 
 #endif

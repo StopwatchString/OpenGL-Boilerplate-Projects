@@ -963,9 +963,6 @@
     <ClInclude Include="include\DebugWindow\imstb_truetype.h">
       <Filter>Header Files\DebugWindow</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\glh\EBO.h">
       <Filter>Header Files\glh</Filter>
     </ClInclude>
@@ -991,6 +988,9 @@
       <Filter>Header Files\glh</Filter>
     </ClInclude>
     <ClInclude Include="include\glh\Texture.h">
+      <Filter>Header Files\glh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glh\Utils.h">
       <Filter>Header Files\glh</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1484,6 +1484,9 @@
       <Filter>Source Files\glh</Filter>
     </ClCompile>
     <ClCompile Include="src\glh\Texture.cpp">
+      <Filter>Source Files\glh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glh\Utils.cpp">
       <Filter>Source Files\glh</Filter>
     </ClCompile>
   </ItemGroup>
