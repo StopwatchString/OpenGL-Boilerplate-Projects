@@ -981,9 +981,6 @@
     <ClInclude Include="include\glh\Shader.h">
       <Filter>Header Files\glh</Filter>
     </ClInclude>
-    <ClInclude Include="include\glh\ShaderProgram.h">
-      <Filter>Header Files\glh</Filter>
-    </ClInclude>
     <ClInclude Include="include\glh\UBO.h">
       <Filter>Header Files\glh</Filter>
     </ClInclude>
@@ -991,6 +988,9 @@
       <Filter>Header Files\glh</Filter>
     </ClInclude>
     <ClInclude Include="include\glh\VBO.h">
+      <Filter>Header Files\glh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glh\Texture.h">
       <Filter>Header Files\glh</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1474,9 +1474,6 @@
     <ClCompile Include="src\glh\UBO.cpp">
       <Filter>Source Files\glh</Filter>
     </ClCompile>
-    <ClCompile Include="src\glh\ShaderProgram.cpp">
-      <Filter>Source Files\glh</Filter>
-    </ClCompile>
     <ClCompile Include="src\glh\EBO.cpp">
       <Filter>Source Files\glh</Filter>
     </ClCompile>
@@ -1484,6 +1481,9 @@
       <Filter>Source Files\glh</Filter>
     </ClCompile>
     <ClCompile Include="src\glh\Shader.cpp">
+      <Filter>Source Files\glh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glh\Texture.cpp">
       <Filter>Source Files\glh</Filter>
     </ClCompile>
   </ItemGroup>

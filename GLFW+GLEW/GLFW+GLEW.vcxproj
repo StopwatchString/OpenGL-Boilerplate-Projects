@@ -159,7 +159,7 @@
     <ClInclude Include="include\glh\macros.h" />
     <ClInclude Include="include\glh\Program.h" />
     <ClInclude Include="include\glh\Shader.h" />
-    <ClInclude Include="include\glh\ShaderProgram.h" />
+    <ClInclude Include="include\glh\Texture.h" />
     <ClInclude Include="include\glh\UBO.h" />
     <ClInclude Include="include\glh\VAO.h" />
     <ClInclude Include="include\glh\VBO.h" />
@@ -618,7 +618,7 @@
     <ClCompile Include="src\glh\EBO.cpp" />
     <ClCompile Include="src\glh\Program.cpp" />
     <ClCompile Include="src\glh\Shader.cpp" />
-    <ClCompile Include="src\glh\ShaderProgram.cpp" />
+    <ClCompile Include="src\glh\Texture.cpp" />
     <ClCompile Include="src\glh\UBO.cpp" />
     <ClCompile Include="src\glh\VAO.cpp" />
     <ClCompile Include="src\glh\VBO.cpp" />
