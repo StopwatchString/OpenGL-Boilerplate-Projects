@@ -1,4 +1,4 @@
-#include "glh/glh.h"
+#include "glh/Program.h"
 #include "glh/macros.h"
 
 namespace glh {
