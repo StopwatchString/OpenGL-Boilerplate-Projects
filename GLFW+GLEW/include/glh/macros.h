@@ -2,6 +2,8 @@
 #define GLH_MACROS_H
 
 #ifndef NDEBUG
+#include <iostream>
+
 #define GL_ERROR_CHECK(namespaceId, funcName, glFuncName) \
 do {                                                                                                                                          \
     GLenum errorCode = glGetError();                                                                                                          \
