@@ -154,6 +154,12 @@
     <ClInclude Include="include\DebugWindow\imstb_truetype.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\GLFW\glfw3native.h" />
+    <ClInclude Include="include\glh\EBO.h" />
+    <ClInclude Include="include\glh\macros.h" />
+    <ClInclude Include="include\glh\ShaderProgram.h" />
+    <ClInclude Include="include\glh\UBO.h" />
+    <ClInclude Include="include\glh\VAO.h" />
+    <ClInclude Include="include\glh\VBO.h" />
     <ClInclude Include="include\glm\common.hpp" />
     <ClInclude Include="include\glm\detail\compute_common.hpp" />
     <ClInclude Include="include\glm\detail\compute_vector_decl.hpp" />
@@ -442,11 +448,6 @@
     <ClInclude Include="include\glm\vec3.hpp" />
     <ClInclude Include="include\glm\vec4.hpp" />
     <ClInclude Include="include\glm\vector_relational.hpp" />
-    <ClInclude Include="include\gltk\EBO.h" />
-    <ClInclude Include="include\gltk\ShaderProgram.h" />
-    <ClInclude Include="include\gltk\UBO.h" />
-    <ClInclude Include="include\gltk\VAO.h" />
-    <ClInclude Include="include\gltk\VBO.h" />
     <ClInclude Include="include\GL\eglew.h" />
     <ClInclude Include="include\GL\glew.h" />
     <ClInclude Include="include\GL\glxew.h" />
@@ -611,11 +612,11 @@
     <ClCompile Include="src\DebugWindow\imgui_widgets.cpp" />
     <ClCompile Include="src\DebugWindow\implot.cpp" />
     <ClCompile Include="src\DebugWindow\implot_items.cpp" />
-    <ClCompile Include="src\gltk\EBO.cpp" />
-    <ClCompile Include="src\gltk\ShaderProgram.cpp" />
-    <ClCompile Include="src\gltk\UBO.cpp" />
-    <ClCompile Include="src\gltk\VAO.cpp" />
-    <ClCompile Include="src\gltk\VBO.cpp" />
+    <ClCompile Include="src\glh\EBO.cpp" />
+    <ClCompile Include="src\glh\ShaderProgram.cpp" />
+    <ClCompile Include="src\glh\UBO.cpp" />
+    <ClCompile Include="src\glh\VAO.cpp" />
+    <ClCompile Include="src\glh\VBO.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
