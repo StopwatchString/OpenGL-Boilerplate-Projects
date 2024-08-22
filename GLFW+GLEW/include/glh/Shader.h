@@ -13,9 +13,9 @@ namespace glh {
         // GL_TESS_EVALUATION_SHADER
         // GL_GEOMETRY_SHADER
         // GL_FRAGMENT_SHADER
-        void create(GLuint& shader, GLenum shaderType);
+        GLuint create(GLenum shaderType);
 
-        void destroy(GLuint& shader);
+        void destroy(GLuint shader);
 
         void attachSource(GLuint shader, GLsizei count, const GLchar** string, const GLint* length);
 
