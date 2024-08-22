@@ -31,7 +31,7 @@ static DebugInfoVAO* debugInfoVAO = DebugInfoVAO::getInstance();
 do {                                                                                       \
     if (expectedBoundVAO == 0) continue;                                                   \
     if (expectedBoundVAO != debugInfoVAO->currentlyBoundVAO) {                             \
-        std::cerr << "glh::VAO::" << funcName << "()"                                     \
+        std::cerr << "glh::VAO::" << funcName << "()"                                      \
             << " VAO expected=" <<  expectedBoundVAO                                       \
             << " VAO current=" << debugInfoVAO->currentlyBoundVAO << '\n';                 \
     }                                                                                      \
@@ -52,7 +52,6 @@ namespace glh {
             GL_ERROR_CHECK("VAO", "create", "Prexisting");
 
             glGenVertexArrays(1, &VAO);
-
             GL_ERROR_CHECK("VAO", "create", "glGenVertexArrays");
         }
 
@@ -60,7 +59,6 @@ namespace glh {
             GL_ERROR_CHECK("VAO", "create", "Prexisting");
 
             glGenVertexArrays(num, VAOArray);
-
             GL_ERROR_CHECK("VAO", "create", "glGenVertexArrays");
         }
 
@@ -68,7 +66,6 @@ namespace glh {
             GL_ERROR_CHECK("VAO", "destroy", "Prexisting");
 
             glDeleteVertexArrays(1, &VAO);
-
             GL_ERROR_CHECK("VAO", "destroy", "glDeleteVertexArrays");
         }
 
@@ -76,7 +73,6 @@ namespace glh {
             GL_ERROR_CHECK("VAO", "destroy", "Prexisting");
 
             glDeleteVertexArrays(num, VAOArray);
-
             GL_ERROR_CHECK("VAO", "destroy", "glDeleteVertexArrays");
         }
 
@@ -85,7 +81,6 @@ namespace glh {
             TRACK_BOUND_VAO(VAO);
 
             glBindVertexArray(VAO);
-
             GL_ERROR_CHECK("VAO", "bind", "glBindVertexArray");
         }
 
@@ -94,7 +89,6 @@ namespace glh {
             VERIFY_BOUND_VAO(expectedBoundVAO, "enableVertexAttribArray");
 
             glEnableVertexAttribArray(index);
-
             GL_ERROR_CHECK("VAO", "enableVertexAttribArray", "glEnableVertexAttribArray");
         }
 
@@ -103,7 +97,6 @@ namespace glh {
             VERIFY_BOUND_VAO(expectedBoundVAO, "disableVertexAttribArray");
 
             glDisableVertexAttribArray(index);
-
             GL_ERROR_CHECK("VAO", "disableVertexAttribArray", "glDisableVertexAttribArray");
         }
 
@@ -112,7 +105,6 @@ namespace glh {
             VERIFY_BOUND_VAO(expectedBoundVAO, "vertexAttribPointer");
 
             glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-
             GL_ERROR_CHECK("VAO", "vertexAttribPointer", "glVertexAttribPointer");
         }
     }

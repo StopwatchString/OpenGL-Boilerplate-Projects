@@ -52,7 +52,6 @@ namespace glh {
             GL_ERROR_CHECK("UBO", "create", "Prexisting");
 
             glGenBuffers(1, &UBO);
-
             GL_ERROR_CHECK("UBO", "create", "glGenBuffers");
         }
 
@@ -60,7 +59,6 @@ namespace glh {
             GL_ERROR_CHECK("UBO", "create", "Prexisting");
 
             glGenBuffers(num, UBOArray);
-
             GL_ERROR_CHECK("UBO", "create", "glGenBuffers");
         }
 
@@ -68,7 +66,6 @@ namespace glh {
             GL_ERROR_CHECK("UBO", "destroy", "Prexisting");
 
             glDeleteBuffers(1, &UBO);
-
             GL_ERROR_CHECK("UBO", "destroy", "glDeleteBuffers");
         }
 
@@ -76,7 +73,6 @@ namespace glh {
             GL_ERROR_CHECK("UBO", "destroy", "Prexisting");
 
             glDeleteBuffers(num, UBOArray);
-
             GL_ERROR_CHECK("UBO", "destroy", "glDeleteBuffers");
         }
 
@@ -85,7 +81,6 @@ namespace glh {
             TRACK_BOUND_UBO(UBO);
 
             glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-
             GL_ERROR_CHECK("UBO", "bind", "glBindBuffer");
         }
 
@@ -94,7 +89,6 @@ namespace glh {
             VERIFY_BOUND_UBO(expectedBoundUBO, "allocateBuffer");
 
             glBufferData(GL_UNIFORM_BUFFER, size, data, usage);
-
             GL_ERROR_CHECK("UBO", "allocateBuffer", "glBufferData");
         }
 
@@ -103,7 +97,6 @@ namespace glh {
             VERIFY_BOUND_UBO(expectedBoundUBO, "updateBuffer");
 
             glBufferSubData(GL_UNIFORM_BUFFER, offset, size, data);
-
             GL_ERROR_CHECK("UBO", "updateBuffer", "glBufferSubData");
         }
 
@@ -111,7 +104,6 @@ namespace glh {
             GL_ERROR_CHECK("UBO", "bindBufferBase", "Prexisting");
 
             glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, UBO);
-
             GL_ERROR_CHECK("UBO", "bindBufferBase", "glBindBufferBase");
         }
     }

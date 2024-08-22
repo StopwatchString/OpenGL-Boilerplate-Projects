@@ -31,7 +31,7 @@ static DebugInfoEBO* debugInfoEBO = DebugInfoEBO::getInstance();
 do {                                                                                       \
     if (expectedBoundEBO == 0) continue;                                                   \
     if (expectedBoundEBO != debugInfoEBO->currentlyBoundEBO) {                             \
-        std::cerr << "glh::EBO::" << funcName << "()"                                     \
+        std::cerr << "glh::EBO::" << funcName << "()"                                      \
             << " EBO expected=" <<  expectedBoundEBO                                       \
             << " EBO current=" << debugInfoEBO->currentlyBoundEBO << '\n';                 \
     }                                                                                      \
@@ -52,7 +52,6 @@ namespace glh {
             GL_ERROR_CHECK("EBO", "create", "Prexisting");
 
             glGenBuffers(1, &EBO);
-
             GL_ERROR_CHECK("EBO", "create", "glGenBuffers");
         }
 
@@ -60,7 +59,6 @@ namespace glh {
             GL_ERROR_CHECK("EBO", "create", "Prexisting");
 
             glGenBuffers(num, EBOArray);
-
             GL_ERROR_CHECK("EBO", "create", "glGenBuffers");
         }
 
@@ -68,7 +66,6 @@ namespace glh {
             GL_ERROR_CHECK("EBO", "destroy", "Prexisting");
 
             glDeleteBuffers(1, &EBO);
-
             GL_ERROR_CHECK("EBO", "destroy", "glDeleteBuffers");
         }
 
@@ -76,7 +73,6 @@ namespace glh {
             GL_ERROR_CHECK("EBO", "destroy", "Prexisting");
 
             glDeleteBuffers(num, EBOArray);
-
             GL_ERROR_CHECK("EBO", "destroy", "glDeleteBuffers");
         }
 
@@ -85,7 +81,6 @@ namespace glh {
             TRACK_BOUND_EBO(EBO);
 
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
             GL_ERROR_CHECK("EBO", "bind", "glBindBuffer");
         }
 
@@ -94,7 +89,6 @@ namespace glh {
             VERIFY_BOUND_EBO(expectedBoundEBO, "allocateBuffer");
 
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage);
-
             GL_ERROR_CHECK("EBO", "allocateBuffer", "glBufferData");
         }
 
@@ -103,7 +97,6 @@ namespace glh {
             VERIFY_BOUND_EBO(expectedBoundEBO, "updateBuffer");
 
             glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, size, data);
-
             GL_ERROR_CHECK("EBO", "updateBuffer", "glBufferSubData");
         }
     }
