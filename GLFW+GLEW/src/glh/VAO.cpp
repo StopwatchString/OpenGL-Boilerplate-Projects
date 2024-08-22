@@ -1,4 +1,5 @@
 #include "glh/VAO.h"
+#include "glh/macros.h"
 
 #include <iostream>
 
@@ -48,43 +49,71 @@ do {                                                                            
 namespace glh {
     namespace VAO {
         void create(GLuint& VAO) {
+            GL_ERROR_CHECK("VAO", "create", "Prexisting");
+
             glGenVertexArrays(1, &VAO);
+
+            GL_ERROR_CHECK("VAO", "create", "glGenVertexArrays");
         }
 
         void create(GLsizei num, GLuint* VAOArray) {
+            GL_ERROR_CHECK("VAO", "create", "Prexisting");
+
             glGenVertexArrays(num, VAOArray);
+
+            GL_ERROR_CHECK("VAO", "create", "glGenVertexArrays");
         }
 
         void destroy(GLuint& VAO) {
+            GL_ERROR_CHECK("VAO", "destroy", "Prexisting");
+
             glDeleteVertexArrays(1, &VAO);
+
+            GL_ERROR_CHECK("VAO", "destroy", "glDeleteVertexArrays");
         }
 
         void destroy(GLsizei num, GLuint* VAOArray) {
+            GL_ERROR_CHECK("VAO", "destroy", "Prexisting");
+
             glDeleteVertexArrays(num, VAOArray);
+
+            GL_ERROR_CHECK("VAO", "destroy", "glDeleteVertexArrays");
         }
 
         void bind(GLuint VAO) {
+            GL_ERROR_CHECK("VAO", "bind", "Prexisting");
             TRACK_BOUND_VAO(VAO);
 
             glBindVertexArray(VAO);
+
+            GL_ERROR_CHECK("VAO", "bind", "glBindVertexArray");
         }
 
         void enableVertexAttribArray(GLuint index, GLuint expectedBoundVAO) {
+            GL_ERROR_CHECK("VAO", "enableVertexAttribArray", "Prexisting");
             VERIFY_BOUND_VAO(expectedBoundVAO, "enableVertexAttribArray");
 
             glEnableVertexAttribArray(index);
+
+            GL_ERROR_CHECK("VAO", "enableVertexAttribArray", "glEnableVertexAttribArray");
         }
 
         void disableVertexAttribArray(GLuint index, GLuint expectedBoundVAO) {
+            GL_ERROR_CHECK("VAO", "disableVertexAttribArray", "Prexisting");
             VERIFY_BOUND_VAO(expectedBoundVAO, "disableVertexAttribArray");
 
             glDisableVertexAttribArray(index);
+
+            GL_ERROR_CHECK("VAO", "disableVertexAttribArray", "glDisableVertexAttribArray");
         }
 
         void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer, GLuint expectedBoundVAO) {
+            GL_ERROR_CHECK("VAO", "vertexAttribPointer", "Prexisting");
             VERIFY_BOUND_VAO(expectedBoundVAO, "vertexAttribPointer");
 
             glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+
+            GL_ERROR_CHECK("VAO", "vertexAttribPointer", "glVertexAttribPointer");
         }
     }
 }
