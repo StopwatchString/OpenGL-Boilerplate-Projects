@@ -7,19 +7,15 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
-#include "glh/VAO.h"
-#include "glh/VBO.h"
-#include "glh/EBO.h"
-#include "glh/UBO.h"
-#include "glh/ShaderProgram.h"
+#include "glh/glh.h"
 
 #include "utils.h"
 
 #define DEBUG_WINDOW
 #include "DebugWindowGLFW.h"
 
-const std::string vertshader = "res/default.vert";
-const std::string fragshader = "res/default.frag";
+const std::string vertSourceFile = "res/default.vert";
+const std::string fragSourceFile = "res/default.frag";
 
 int windowWidth = 1000;
 int windowHeight = 1000;
@@ -127,8 +123,20 @@ int main()
     glEnable(GL_CULL_FACE);
 
     // Initialize OpenGL Resources
-    GLuint shader_program;
-    glh::ShaderProgram::create(shader_program, loadFile(vertshader), loadFile(fragshader));
+    GLuint vertexShader = glh::shader::create(GL_VERTEX_SHADER);
+    const char* vertSource = loadFile(vertSourceFile);
+    glh::shader::attachSource(vertexShader, 1, &vertSource, NULL);
+    glh::shader::compileShader(vertexShader);
+
+    GLuint fragmentShader = glh::shader::create(GL_FRAGMENT_SHADER);
+    const char* fragSource = loadFile(fragSourceFile);
+    glh::shader::attachSource(fragmentShader, 1, &fragSource, NULL);
+    glh::shader::compileShader(fragmentShader);
+    
+    GLuint program = glh::program::create();
+    glh::program::attachShader(program, vertexShader);
+    glh::program::attachShader(program, fragmentShader);
+    glh::program::linkProgram(program);
 
     GLuint vertex_array;
     glh::VAO::create(vertex_array);
@@ -212,14 +220,14 @@ int main()
 
         glViewport(0, 0, windowWidth, windowHeight);
 
-        glh::ShaderProgram::bind(shader_program);
+        glh::program::bind(program);
 
         xRot += xRotSpeed;
         yRot += yRotSpeed;
         zRot += zRotSpeed;
         data.mvp = getRotMat(xRot, yRot, zRot);
         data.time = glfwGetTime();
-        
+
         glh::UBO::updateBuffer(0, sizeof(uniformData), &data, uniform_buffer);
 
         glClearColor(r, g, b, a);
@@ -233,10 +241,6 @@ int main()
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-
-        if (glGetError() != GL_NO_ERROR) {
-            std::cout << "GL Error at end of draw" << std::endl;
-        }
     }
 
     glfwTerminate();
