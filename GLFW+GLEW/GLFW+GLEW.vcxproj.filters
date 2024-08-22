@@ -28,10 +28,10 @@
     <Filter Include="Source Files\DebugWindow">
       <UniqueIdentifier>{d728afe9-ba50-4b56-a9ad-7355c95787f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\gltk">
+    <Filter Include="Header Files\glh">
       <UniqueIdentifier>{7b9f0c1a-318f-439b-b646-61c28b72be6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\gltk">
+    <Filter Include="Source Files\glh">
       <UniqueIdentifier>{f360d798-f2cc-4e0e-a766-2a37ced3bfd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -966,20 +966,32 @@
     <ClInclude Include="include\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\gltk\UBO.h">
-      <Filter>Header Files\gltk</Filter>
+    <ClInclude Include="include\glh\EBO.h">
+      <Filter>Header Files\glh</Filter>
     </ClInclude>
-    <ClInclude Include="include\gltk\VAO.h">
-      <Filter>Header Files\gltk</Filter>
+    <ClInclude Include="include\glh\glh.h">
+      <Filter>Header Files\glh</Filter>
     </ClInclude>
-    <ClInclude Include="include\gltk\VBO.h">
-      <Filter>Header Files\gltk</Filter>
+    <ClInclude Include="include\glh\macros.h">
+      <Filter>Header Files\glh</Filter>
     </ClInclude>
-    <ClInclude Include="include\gltk\EBO.h">
-      <Filter>Header Files\gltk</Filter>
+    <ClInclude Include="include\glh\Program.h">
+      <Filter>Header Files\glh</Filter>
     </ClInclude>
-    <ClInclude Include="include\gltk\ShaderProgram.h">
-      <Filter>Header Files\gltk</Filter>
+    <ClInclude Include="include\glh\Shader.h">
+      <Filter>Header Files\glh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glh\ShaderProgram.h">
+      <Filter>Header Files\glh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glh\UBO.h">
+      <Filter>Header Files\glh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glh\VAO.h">
+      <Filter>Header Files\glh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glh\VBO.h">
+      <Filter>Header Files\glh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1453,20 +1465,26 @@
     <ClCompile Include="src\DebugWindow\DebugWindow.cpp">
       <Filter>Source Files\DebugWindow</Filter>
     </ClCompile>
-    <ClCompile Include="src\gltk\ShaderProgram.cpp">
-      <Filter>Source Files\gltk</Filter>
+    <ClCompile Include="src\glh\VBO.cpp">
+      <Filter>Source Files\glh</Filter>
     </ClCompile>
-    <ClCompile Include="src\gltk\UBO.cpp">
-      <Filter>Source Files\gltk</Filter>
+    <ClCompile Include="src\glh\VAO.cpp">
+      <Filter>Source Files\glh</Filter>
     </ClCompile>
-    <ClCompile Include="src\gltk\VAO.cpp">
-      <Filter>Source Files\gltk</Filter>
+    <ClCompile Include="src\glh\UBO.cpp">
+      <Filter>Source Files\glh</Filter>
     </ClCompile>
-    <ClCompile Include="src\gltk\VBO.cpp">
-      <Filter>Source Files\gltk</Filter>
+    <ClCompile Include="src\glh\ShaderProgram.cpp">
+      <Filter>Source Files\glh</Filter>
     </ClCompile>
-    <ClCompile Include="src\gltk\EBO.cpp">
-      <Filter>Source Files\gltk</Filter>
+    <ClCompile Include="src\glh\EBO.cpp">
+      <Filter>Source Files\glh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glh\Program.cpp">
+      <Filter>Source Files\glh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glh\Shader.cpp">
+      <Filter>Source Files\glh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
