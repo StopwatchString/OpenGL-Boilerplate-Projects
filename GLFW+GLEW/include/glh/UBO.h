@@ -1,10 +1,10 @@
-#ifndef GLTK_UBO_H
-#define GLTK_UBO_H
+#ifndef GLH_UBO_H
+#define GLH_UBO_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
 
-namespace gltk {
+namespace glh {
     namespace UBO {
         void create(GLuint& UBO);
         void create(GLsizei num, GLuint* UBOArray);

@@ -1,4 +1,4 @@
-#include "gltk/EBO.h"
+#include "glh/EBO.h"
 
 #include <iostream>
 
@@ -30,7 +30,7 @@ static DebugInfoEBO* debugInfoEBO = DebugInfoEBO::getInstance();
 do {                                                                                       \
     if (expectedBoundEBO == 0) continue;                                                   \
     if (expectedBoundEBO != debugInfoEBO->currentlyBoundEBO) {                             \
-        std::cerr << "gltk::EBO::" << funcName << "()"                                     \
+        std::cerr << "glh::EBO::" << funcName << "()"                                     \
             << " EBO expected=" <<  expectedBoundEBO                                       \
             << " EBO current=" << debugInfoEBO->currentlyBoundEBO << '\n';                 \
     }                                                                                      \
@@ -45,7 +45,7 @@ do {                                                                            
 
 #endif
 
-namespace gltk {
+namespace glh {
     namespace EBO {
         void create(GLuint& EBO) {
             glGenBuffers(1, &EBO);

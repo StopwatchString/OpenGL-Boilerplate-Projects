@@ -1,10 +1,10 @@
-#ifndef GLTK_VBO_H
-#define GLTK_VBO_H
+#ifndef GLH_VBO_H
+#define GLH_VBO_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
 
-namespace gltk {
+namespace glh {
     namespace VBO {
         void create(GLuint& VBO);
         void create(GLsizei num, GLuint* VBOArray);

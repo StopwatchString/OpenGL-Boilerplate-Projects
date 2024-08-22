@@ -1,4 +1,4 @@
-#include "gltk/VBO.h"
+#include "glh/VBO.h"
 
 #include <iostream>
 
@@ -30,7 +30,7 @@ static DebugInfoVBO* debugInfoVBO = DebugInfoVBO::getInstance();
 do {                                                                                       \
     if (expectedBoundVBO == 0) continue;                                                   \
     if (expectedBoundVBO != debugInfoVBO->currentlyBoundVBO) {                             \
-        std::cerr << "gltk::VBO::" << funcName << "()"                                     \
+        std::cerr << "glh::VBO::" << funcName << "()"                                     \
             << " VBO expected=" <<  expectedBoundVBO                                       \
             << " VBO current=" << debugInfoVBO->currentlyBoundVBO << '\n';                 \
     }                                                                                      \
@@ -45,7 +45,7 @@ do {                                                                            
 
 #endif
 
-namespace gltk {
+namespace glh {
     namespace VBO {
         void create(GLuint& VBO) {
             glGenBuffers(1, &VBO);

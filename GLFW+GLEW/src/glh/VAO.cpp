@@ -1,4 +1,4 @@
-#include "gltk/VAO.h"
+#include "glh/VAO.h"
 
 #include <iostream>
 
@@ -30,7 +30,7 @@ static DebugInfoVAO* debugInfoVAO = DebugInfoVAO::getInstance();
 do {                                                                                       \
     if (expectedBoundVAO == 0) continue;                                                   \
     if (expectedBoundVAO != debugInfoVAO->currentlyBoundVAO) {                             \
-        std::cerr << "gltk::VAO::" << funcName << "()"                                     \
+        std::cerr << "glh::VAO::" << funcName << "()"                                     \
             << " VAO expected=" <<  expectedBoundVAO                                       \
             << " VAO current=" << debugInfoVAO->currentlyBoundVAO << '\n';                 \
     }                                                                                      \
@@ -45,7 +45,7 @@ do {                                                                            
 
 #endif
 
-namespace gltk {
+namespace glh {
     namespace VAO {
         void create(GLuint& VAO) {
             glGenVertexArrays(1, &VAO);

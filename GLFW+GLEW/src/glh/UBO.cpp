@@ -1,4 +1,4 @@
-#include "gltk/UBO.h"
+#include "glh/UBO.h"
 
 #include <iostream>
 
@@ -30,7 +30,7 @@ static DebugInfoUBO* debugInfoUBO = DebugInfoUBO::getInstance();
 do {                                                                                       \
     if (expectedBoundUBO == 0) continue;                                                   \
     if (expectedBoundUBO != debugInfoUBO->currentlyBoundUBO) {                             \
-        std::cerr << "gltk::UBO::" << funcName << "()"                                     \
+        std::cerr << "glh::UBO::" << funcName << "()"                                     \
             << " UBO expected=" <<  expectedBoundUBO                                       \
             << " UBO current=" << debugInfoUBO->currentlyBoundUBO << '\n';                 \
     }                                                                                      \
@@ -45,7 +45,7 @@ do {                                                                            
 
 #endif
 
-namespace gltk {
+namespace glh {
     namespace UBO {
         void create(GLuint& UBO) {
             glGenBuffers(1, &UBO);

@@ -1,10 +1,10 @@
-#ifndef GLTK_EBO_H
-#define GLTK_EBO_H
+#ifndef GLH_EBO_H
+#define GLH_EBO_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
 
-namespace gltk {
+namespace glh {
     namespace EBO {
         void create(GLuint& EBO);
         void create(GLsizei num, GLuint* EBOArray);

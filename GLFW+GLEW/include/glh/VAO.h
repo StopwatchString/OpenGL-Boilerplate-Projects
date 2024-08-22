@@ -1,10 +1,10 @@
-#ifndef GLTK_VAO_H
-#define GLTK_VAO_H
+#ifndef GLH_VAO_H
+#define GLH_VAO_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
 
-namespace gltk {
+namespace glh {
     namespace VAO {
         void create(GLuint& VAO);
         void create(GLsizei num, GLuint* VAOArray);

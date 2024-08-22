@@ -7,11 +7,11 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
-#include "gltk/VAO.h"
-#include "gltk/VBO.h"
-#include "gltk/EBO.h"
-#include "gltk/UBO.h"
-#include "gltk/ShaderProgram.h"
+#include "glh/VAO.h"
+#include "glh/VBO.h"
+#include "glh/EBO.h"
+#include "glh/UBO.h"
+#include "glh/ShaderProgram.h"
 
 #include "utils.h"
 
@@ -128,30 +128,30 @@ int main()
 
     // Initialize OpenGL Resources
     GLuint shader_program;
-    gltk::ShaderProgram::create(shader_program, loadFile(vertshader), loadFile(fragshader));
+    glh::ShaderProgram::create(shader_program, loadFile(vertshader), loadFile(fragshader));
 
     GLuint vertex_array;
-    gltk::VAO::create(vertex_array);
-    gltk::VAO::bind(vertex_array);
+    glh::VAO::create(vertex_array);
+    glh::VAO::bind(vertex_array);
 
     GLuint vertex_buffer;
-    gltk::VBO::create(vertex_buffer);
-    gltk::VBO::bind(vertex_buffer);
-    gltk::VBO::allocateBuffer(sizeof(Vertex) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW, vertex_buffer);
+    glh::VBO::create(vertex_buffer);
+    glh::VBO::bind(vertex_buffer);
+    glh::VBO::allocateBuffer(sizeof(Vertex) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW, vertex_buffer);
 
     GLuint element_buffer;
-    gltk::EBO::create(element_buffer);
-    gltk::EBO::bind(element_buffer);
-    gltk::EBO::allocateBuffer(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
+    glh::EBO::create(element_buffer);
+    glh::EBO::bind(element_buffer);
+    glh::EBO::allocateBuffer(sizeof(GLuint) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
-    gltk::VAO::enableVertexAttribArray(0, vertex_array);
-    gltk::VAO::vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+    glh::VAO::enableVertexAttribArray(0, vertex_array);
+    glh::VAO::vertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, position), vertex_array);
-    gltk::VAO::enableVertexAttribArray(1, vertex_array);
-    gltk::VAO::vertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
+    glh::VAO::enableVertexAttribArray(1, vertex_array);
+    glh::VAO::vertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, color), vertex_array);
-    gltk::VAO::enableVertexAttribArray(2, vertex_array);
-    gltk::VAO::vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+    glh::VAO::enableVertexAttribArray(2, vertex_array);
+    glh::VAO::vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, texcoord), vertex_array);
 
     float r = 1.0f;
@@ -194,10 +194,10 @@ int main()
     data.mvp = getRotMat(0.0f, 0.0f, 0.0f);
 
     GLuint uniform_buffer;
-    gltk::UBO::create(uniform_buffer);
-    gltk::UBO::bind(uniform_buffer);
-    gltk::UBO::allocateBuffer(sizeof(data), &data, GL_DYNAMIC_DRAW, uniform_buffer);
-    gltk::UBO::bindBufferBase(0, uniform_buffer);
+    glh::UBO::create(uniform_buffer);
+    glh::UBO::bind(uniform_buffer);
+    glh::UBO::allocateBuffer(sizeof(data), &data, GL_DYNAMIC_DRAW, uniform_buffer);
+    glh::UBO::bindBufferBase(0, uniform_buffer);
 
     while (!glfwWindowShouldClose(window)) {
 #ifdef DEBUG_WINDOW
@@ -212,7 +212,7 @@ int main()
 
         glViewport(0, 0, windowWidth, windowHeight);
 
-        gltk::ShaderProgram::bind(shader_program);
+        glh::ShaderProgram::bind(shader_program);
 
         xRot += xRotSpeed;
         yRot += yRotSpeed;
@@ -220,15 +220,15 @@ int main()
         data.mvp = getRotMat(xRot, yRot, zRot);
         data.time = glfwGetTime();
         
-        gltk::UBO::updateBuffer(0, sizeof(uniformData), &data, uniform_buffer);
+        glh::UBO::updateBuffer(0, sizeof(uniformData), &data, uniform_buffer);
 
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        gltk::VBO::bind(vertex_buffer);
-        gltk::VBO::updateBuffer(0, sizeof(Vertex) * vertices.size(), vertices.data(), vertex_buffer);
+        glh::VBO::bind(vertex_buffer);
+        glh::VBO::updateBuffer(0, sizeof(Vertex) * vertices.size(), vertices.data(), vertex_buffer);
 
-        gltk::VAO::bind(vertex_array);
+        glh::VAO::bind(vertex_array);
         glDrawElements(GL_TRIANGLE_STRIP, indices.size(), GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(window);

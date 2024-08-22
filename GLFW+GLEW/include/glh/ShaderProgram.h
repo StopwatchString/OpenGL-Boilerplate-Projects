@@ -1,10 +1,10 @@
-#ifndef GLTK_SHADER_PROGRAM_H
-#define GLTK_SHADER_PROGRAM_H
+#ifndef GLH_SHADER_PROGRAM_H
+#define GLH_SHADER_PROGRAM_H
 
 #define GLEW_STATIC
 #include "GL/glew.h"
 
-namespace gltk {
+namespace glh {
     namespace ShaderProgram {
         void create(GLuint& shaderProgramHandle, const char* vertexSource, const char* fragmentSource);
 

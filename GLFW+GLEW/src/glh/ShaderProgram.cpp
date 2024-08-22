@@ -1,8 +1,8 @@
-#include "gltk/ShaderProgram.h"
+#include "glh/ShaderProgram.h"
 
 #include <iostream>
 
-namespace gltk {
+namespace glh {
     namespace ShaderProgram {
         void create(GLuint& shaderProgramHandle, const char* vertexSource, const char* fragmentSource) {
             const GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
