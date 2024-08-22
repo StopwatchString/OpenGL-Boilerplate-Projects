@@ -34,6 +34,14 @@ static glm::mat4 getRotMat(double angleXDeg, double angleYDeg, double angleZDeg)
     return rotationMatrix;
 }
 
+std::vector<unsigned char> generateTextureData(int width, int height) {
+    std::vector<unsigned char> data(width * height * 4);
+    for (int i = 0; i < data.size(); ++i) {
+        data[i] = rand() % 256;
+    }
+    return data;
+}
+
 static void glfw_error_callback(int error, const char* description)
 {
     std::cerr << "Error: " << description << '\n';
@@ -63,13 +71,13 @@ struct Vertex
 std::vector<Vertex> vertices =
 {
     { { -0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Bottom, Back
-    { {  0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Back
-    { {  0.5f, -0.5f,  0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Bottom, Front
-    { { -0.5f, -0.5f,  0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Bottom, Front
-    { { -0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Back
-    { {  0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Back
-    { {  0.5f,  0.5f,  0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Right, Top,    Front
-    { { -0.5f,  0.5f,  0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } }, // Left,  Top,    Front
+    { {  0.5f, -0.5f, -0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f } }, // Right, Bottom, Back
+    { {  0.5f, -0.5f,  0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Right, Bottom, Front
+    { { -0.5f, -0.5f,  0.5f }, { 1.0f, 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f } }, // Left,  Bottom, Front
+    { { -0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Left,  Top,    Back
+    { {  0.5f,  0.5f, -0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 1.0f } }, // Right, Top,    Back
+    { {  0.5f,  0.5f,  0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } }, // Right, Top,    Front
+    { { -0.5f,  0.5f,  0.5f }, { 0.0f, 1.0f, 0.0f, 1.0f }, { 0.0f, 1.0f } }, // Left,  Top,    Front
 };
 
 // Index data for triangle strip
@@ -161,6 +169,19 @@ int main()
     glh::VAO::enableVertexAttribArray(2, vertex_array);
     glh::VAO::vertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
         sizeof(Vertex), (void*)offsetof(Vertex, texcoord), vertex_array);
+
+    int texWidth = 100;
+    int texHeight = 100;
+    std::vector<unsigned char> textureData = generateTextureData(texWidth, texHeight);
+    GLuint texture;
+    glh::texture::create(texture);
+    glh::texture::bind(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glh::texture::allocateTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, texWidth, texHeight);
+    glh::texture::updateTex2D(GL_TEXTURE_2D, 0, 0, 0, texWidth, texHeight, GL_RGBA, GL_UNSIGNED_BYTE, textureData.data());
 
     float r = 1.0f;
     float g = 1.0f;
