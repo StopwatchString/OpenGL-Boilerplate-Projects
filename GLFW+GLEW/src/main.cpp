@@ -229,7 +229,21 @@ int main()
     while (!glfwWindowShouldClose(window)) {
 #ifdef DEBUG_WINDOW
         if (reloadShaders) {
-            // impl later
+            glh::program::detachShader(program, vertexShader);
+            glh::program::detachShader(program, fragmentShader);
+
+            const char* vertSourceReload = glh::utils::loadFile(vertSourceFile);
+            glh::shader::attachSource(vertexShader, 1, &vertSourceReload, NULL);
+            glh::shader::compileShader(vertexShader);
+
+            const char* fragSourceReload = glh::utils::loadFile(fragSourceFile);
+            glh::shader::attachSource(fragmentShader, 1, &fragSourceReload, NULL);
+            glh::shader::compileShader(fragmentShader);
+
+            glh::program::attachShader(program, vertexShader);
+            glh::program::attachShader(program, fragmentShader);
+            glh::program::linkProgram(program);
+
             reloadShaders = false;
         }
         if (debugWindow.isWindowOpen()) {

@@ -33,6 +33,13 @@ namespace glh {
             GL_ERROR_CHECK("program", "attachShader", "glAttachShader");
         }
 
+        void detachShader(GLuint program, GLuint shader) {
+            GL_ERROR_CHECK("program", "detachShader", "Prexisting");
+
+            glDetachShader(program, shader);
+            GL_ERROR_CHECK("program", "detachShader", "glDetachShader");
+        }
+
         void linkProgram(GLuint program) {
             GL_ERROR_CHECK("program", "linkProgram", "Prexisting");
 

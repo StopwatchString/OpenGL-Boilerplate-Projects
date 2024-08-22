@@ -13,6 +13,7 @@ namespace glh {
         void bind(GLuint program);
 
         void attachShader(GLuint program, GLuint shader);
+        void detachShader(GLuint program, GLuint shader);
 
         void linkProgram(GLuint program);
     }

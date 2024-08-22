@@ -12,6 +12,6 @@ out vec4 fragment;
 
 void main()
 {
-    fragment = texture(tex, frag_texcoord);
-    //fragment = vec4(frag_color.r, frag_color.b, frag_color.g, frag_color.a);
+    //fragment = texture(tex, frag_texcoord);
+    fragment = vec4(frag_color.r, frag_color.b, frag_color.g, frag_color.a);
 }
